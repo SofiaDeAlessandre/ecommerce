@@ -3,6 +3,7 @@ import { Container, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { FirebaseContext } from './context/FirebaseContext';
 import { Header } from './layout/Header';
+import { Footer } from './layout/Footer';
 function App() {
 const { products } = useContext(FirebaseContext)
 const { users } = useContext(FirebaseContext)
@@ -27,6 +28,7 @@ return (
 				))}
 			</ul>
   </Container>
+  <Footer/>
   </>
 );
 }
