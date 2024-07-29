@@ -2,11 +2,13 @@ import './App.css'
 import { Container, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { FirebaseContext } from './context/FirebaseContext';
-
+import { Header } from './layout/Header';
 function App() {
 const { products } = useContext(FirebaseContext)
 const { users } = useContext(FirebaseContext)
 return (
+  <>
+  <Header/>
   <Container>
     {products.map(product => (
       <Container key={product.id}>
@@ -25,6 +27,7 @@ return (
 				))}
 			</ul>
   </Container>
+  </>
 );
 }
 export default App;
