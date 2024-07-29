@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react"
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 export const FirebaseContext = createContext()
 
 export const FirebaseProvider = ({ children }) => {
@@ -34,6 +34,7 @@ export const FirebaseProvider = ({ children }) => {
       console.log("no-bucle")
     }, []);
 
+    
   return (
     <FirebaseContext.Provider value={{products, setProducts, users, setUsers}}>{children}</FirebaseContext.Provider>
   )
