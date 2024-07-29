@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { TextField, Button, Container } from '@mui/material'
-
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const validationSchema = yup.object({
         email: yup
@@ -16,16 +16,29 @@ const validationSchema = yup.object({
       });
       
     export const Login = () => {
-        const formik = useFormik({
-          initialValues: {
-            email: 'foobar@example.com',
-            password: 'foobar',
-          },
-          validationSchema: validationSchema,
-          onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
-          },
-        });
+        const auth = getAuth();
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+
+        const user = userCredential.user;
+        console.log('User logged in:', user.email);
+      } catch (error) {
+        console.error('Error during login:', error.code, error.message);
+      }
+    },
+  });
       
         return (
           <Container as="form" onSubmit={formik.handleSubmit}>

@@ -27,7 +27,6 @@ export const FirebaseProvider = ({ children }) => {
         const results = await getDocs(collectionReference1);
         const newArrayUsers = results.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setUsers(newArrayUsers);
-    
     }
     useEffect(() => {
       getCollection1();
