@@ -4,13 +4,12 @@ import { Footer } from './layout/Footer';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login'
 import { CardsContainer } from './components/CardsContainer';
+import { Main } from './layout/Main';
 function App() {
 return (
   <>
   <Header/>
- <CardsContainer/>
-  <Register/>
-  <Login/>
+ <Main/>
   <Footer/>
   </>
 );

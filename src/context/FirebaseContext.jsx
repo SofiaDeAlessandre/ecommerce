@@ -9,7 +9,7 @@ export const FirebaseProvider = ({ children }) => {
     const [users, setUsers] = useState([])
 
     const getCollection = async () => {
-        const collectionReference = collection(db, "productos");
+        const collectionReference = collection(db, "products");
         console.log("no-bucle");
         const results = await getDocs(collectionReference);
         const newArray = results.docs.map(doc => ({ id: doc.id, ...doc.data() }));

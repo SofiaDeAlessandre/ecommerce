@@ -11,17 +11,29 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { GiHamburgerMenu } from "react-icons/gi";
-import { BiCartDownload } from "react-icons/bi";
-import { IoIosSearch } from "react-icons/io";
-
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { BiCartDownload } from 'react-icons/bi';
+import { IoIosSearch } from 'react-icons/io';
+import { useState } from 'react';
+import { Cart } from './Cart';
 
 const pages = ['Productos'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export const NavBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const [state, setState] = useState({
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -52,7 +64,7 @@ export const NavBar = () => {
       width: 'auto',
     },
   }));
-  
+
   const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
@@ -62,7 +74,7 @@ export const NavBar = () => {
     alignItems: 'center',
     justifyContent: 'center',
   }));
-  
+
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     width: '100%',
@@ -79,7 +91,7 @@ export const NavBar = () => {
       },
     },
   }));
-  
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -104,9 +116,10 @@ export const NavBar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <GiHamburgerMenu
-              style={{fontSize:"25px"}} 
-                onClick={handleOpenNavMenu}/>
+            <GiHamburgerMenu
+              style={{ fontSize: '25px' }}
+              onClick={handleOpenNavMenu}
+            />
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -161,17 +174,21 @@ export const NavBar = () => {
                 {page}
               </Button>
             ))}
-            <Search sx={{display:"flex", alignItems:"center"}}>
-          <IoIosSearch style={{fontSize: "30px"}}/>
-            <StyledInputBase
-              placeholder="Buscar…"
-              inputProps={{ 'aria-label': 'buscar' }}
-            />
-          </Search>
+            <Search sx={{ display: 'flex', alignItems: 'center' }}>
+              <IoIosSearch style={{ fontSize: '30px' }} />
+              <StyledInputBase
+                placeholder="Buscar…"
+                inputProps={{ 'aria-label': 'buscar' }}
+              />
+            </Search>
           </Box>
-          
-          <Box sx={{ flexGrow: 0, display:"flex", alignItems:"center" }}>
-          <BiCartDownload style={{fontSize: "30px"}}/>
+
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+          <BiCartDownload
+        style={{ fontSize: '30px' }}
+        onClick={toggleDrawer('right', true)}
+      />
+      <Cart state={state} toggleDrawer={toggleDrawer} />
             <Tooltip title="Open settings">
               <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -204,4 +221,4 @@ export const NavBar = () => {
       </Container>
     </AppBar>
   );
-}
+};

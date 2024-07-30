@@ -1,10 +1,14 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { TextField, Button, Container, Typography } from '@mui/material';
+import { TextField, Button, Container, Typography, InputAdornment, IconButton } from '@mui/material';
+import { FaEyeSlash } from "react-icons/fa6";
+import { IoEyeSharp } from "react-icons/io5";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const validationSchema = yup.object({
   email: yup
@@ -20,7 +24,9 @@ const validationSchema = yup.object({
 
 
 export const Register = () => {
+  const navigate = useNavigate()
  const auth = getAuth()
+ const [typePassword, setTypePassword] = useState("password");
   const formik = useFormik({
     initialValues: {
       nombre: 'pepito',
@@ -29,7 +35,7 @@ export const Register = () => {
     },
 
     validationSchema: validationSchema,
-    
+
     onSubmit: async (values) => {
         try {
           const userCredential = await createUserWithEmailAndPassword(
@@ -69,7 +75,7 @@ export const Register = () => {
       />
       <TextField
         fullWidth
-        id="email"
+        id="emailRegistro"
         name="email"
         label="Email"
         value={formik.values.email}
@@ -80,20 +86,33 @@ export const Register = () => {
       />
       <TextField
         fullWidth
-        id="password"
+        id="passwordRegistro"
         name="password"
         label="Password"
-        type="password"
+        type={typePassword}
         value={formik.values.password}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.password && Boolean(formik.errors.password)}
         helperText={formik.touched.password && formik.errors.password}
+        InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={() => setTypePassword(typePassword === 'password' ? 'text' : 'password')}
+                  edge="end"
+                >
+                  {typePassword === 'password' ? <IoEyeSharp /> : <FaEyeSlash />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
       />
       <Button color="primary" variant="contained" fullWidth type="submit">
         Registrarse
       </Button>
-      <Typography>Si ya tienes cuenta, <Button>inicia sesión</Button></Typography>
+      <Typography>Si ya tienes cuenta, <Button onClick={()=>navigate("/Login")}>inicia sesión</Button></Typography>
     </Container>
   );
 }
