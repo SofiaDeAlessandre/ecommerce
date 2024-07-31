@@ -9,7 +9,7 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-
+import { IoMdClose } from "react-icons/io";
 const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
@@ -27,6 +27,7 @@ export const Register = () => {
   const navigate = useNavigate()
  const auth = getAuth()
  const [typePassword, setTypePassword] = useState("password");
+ 
   const formik = useFormik({
     initialValues: {
       nombre: 'pepito',
@@ -53,7 +54,7 @@ export const Register = () => {
           };
           await setDoc(doc(db, "users", user.id), user);
           console.log(user);
-          // navigate("/");
+           navigate("/Login");
         } catch (error) {
           console.error("Error during registration: ", error.code, error.message);
         }
@@ -62,6 +63,7 @@ export const Register = () => {
   
   return (
     <Container as="form" onSubmit={formik.handleSubmit}>
+       <IoMdClose onClick={()=>navigate('/')}/> 
          <TextField
         fullWidth
         id="nombre"
@@ -116,3 +118,6 @@ export const Register = () => {
     </Container>
   );
 }
+
+
+//__________________________________________________________________

@@ -14,8 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BiCartDownload } from 'react-icons/bi';
 import { IoIosSearch } from 'react-icons/io';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Cart } from './Cart';
+import { FirebaseContext } from '../context/FirebaseContext';
+import { BsBox2 } from 'react-icons/bs';
 
 const pages = ['Productos'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -23,6 +25,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const { user } = useContext(FirebaseContext);
 
   const [state, setState] = useState({
     right: false,
@@ -140,7 +143,7 @@ export const NavBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Button onClick={()=>navigate('/')}>{page}</Button>
                 </MenuItem>
               ))}
             </Menu>
@@ -182,7 +185,15 @@ export const NavBar = () => {
               />
             </Search>
           </Box>
-
+          <Box>
+        {user ? (
+          <Box>
+            <Typography sx={{padding:"6px"}}>Bienvenido, {user?.username}</Typography>
+          </Box>
+        ) : (
+          ''
+        )}
+      </Box>
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
           <BiCartDownload
         style={{ fontSize: '30px' }}

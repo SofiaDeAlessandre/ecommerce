@@ -1,40 +1,110 @@
-import { createContext, useEffect, useState } from "react"
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-export const FirebaseContext = createContext()
+import { createContext, useEffect, useState } from 'react';
+import { collection, onSnapshot, doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+export const FirebaseContext = createContext();
 
 export const FirebaseProvider = ({ children }) => {
-    const [products, setProducts] = useState([])
-    const [users, setUsers] = useState([])
+  const [products, setProducts] = useState([]);
+  // const [usuarios, setUsuarios] = useState([]);
+  const [user, setUser] = useState(null);
+  const auth = getAuth();
+  useEffect(() => {
+    const getProducts = () => {
+      const collectionReference = collection(db, 'products');
+      onSnapshot(collectionReference, (snapshot) => {
+        const productosArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(productosArray);
+      });
+    };
 
-    const getCollection = async () => {
-        const collectionReference = collection(db, "products");
-        console.log("no-bucle");
-        const results = await getDocs(collectionReference);
-        const newArray = results.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setProducts(newArray);
-    
+    // const getUsuarios = () => {
+    //   const collectionReference = collection(db, 'usuarios');
+    //   onSnapshot(collectionReference, (snapshot) => {
+    //     const usuariosArray = snapshot.docs.map((doc) => ({
+    //       id: doc.id,
+    //       ...doc.data(),
+    //     }));
+    //     setUsuarios(usuariosArray);
+    //   });
+    // };
+
+    getProducts();
+    // getUsuarios();
+  }, []);
+
+  // const loginUser = async (data) => {
+  //   try {
+  //     const userCredential = await signInWithEmailAndPassword(
+  //       auth,
+  //       data.email,
+  //       data.password
+  //     );
+  //     const loggedInUser = userCredential.user;
+  //     // Check if the user exists in Firestore
+  //     const userDocRef = doc(db, 'users', loggedInUser.uid);
+  //     const userDoc = await getDoc(userDocRef);
+
+  //     if (userDoc.exists()) {
+  //       // Retrieve user data from Firestore
+  //       const userData = {
+  //         id: loggedInUser.uid,
+  //         email: loggedInUser.email,
+  //         username: userDoc.data().username,
+  //         descripcion: userDoc.data().descripcion,
+  //         // Add more fields as needed
+  //       };
+  //       setUser(userData); 
+  //       console.log('User logged in:', userData.username);
+  //     } else {
+  //       console.error('User data not found in Firestore');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error during login:', error.code, error.message);
+  //   }
+  // };
+  
+  const getUserInfo = async (uid) => {
+    try {
+      const docRef = doc(db, "users", uid);
+      const document = await getDoc(docRef);
+      return document.data();
+    } catch (err) {
+      console.log(err);
     }
-    useEffect(() => {
-      getCollection();
-      console.log("no-bucle")
-    }, []);
+  };
 
-    const getCollection1 = async () => {
-        const collectionReference1 = collection(db, "usuarios");
-        console.log("no-bucle");
-        const results = await getDocs(collectionReference1);
-        const newArrayUsers = results.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setUsers(newArrayUsers);
-    }
-    useEffect(() => {
-      getCollection1();
-      console.log("no-bucle")
-    }, []);
+  useEffect(() => {
+    const isAuth = () => {
+      onAuthStateChanged(auth, async (user) => {
+        try {
+          if (user) {
+            const uid = user.uid;
+            const userInfo = await getUserInfo(uid);
+            setUser(userInfo);
+          } else {
+            setUser(null);
+          }
+        } catch (error) {
+          setUser(null);
+          console.error('Error during authentication:', error);
+        }
+      });
+    };
+    isAuth();
+  }, []);
 
-    
+
+
   return (
-    <FirebaseContext.Provider value={{products, setProducts, users, setUsers}}>{children}</FirebaseContext.Provider>
-  )
-}
+    <FirebaseContext.Provider
+      value={{ products, setProducts, user, setUser }}
+    >
+      {children}
+    </FirebaseContext.Provider>
+  );
+};
