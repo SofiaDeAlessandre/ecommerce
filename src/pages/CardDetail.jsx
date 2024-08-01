@@ -1,25 +1,34 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { FirebaseContext } from '../context/FirebaseContext';
+import { Container, Typography, Box, Button } from '@mui/material';
+import {AddButton } from '../components/AddButton'
+
+//import { makeStyles } from '@mui/styles';
+
+//const useStyles = makeStyles((theme) => ({ fadeEffect: { transition: 'opacity 0.5s ease-in-out', '&:hover': { opacity: 0.7, }, }, }));
 
 export const CardDetail = () => {
+  
   const { id } = useParams();
   const { products } = useContext(FirebaseContext);
 
   const product = products.find((product) => product.id === id);
 
   return (
-    <div>
+    <Container style={{display:"flex", justifyContent:"center"}}>
       {product ? (
-        <>
-          <h2>Detalles del producto {product.username}</h2>
-          <img src={product.image} alt={product.name} style={{width:"300px"}}/>
-          <p>{product.description}</p>
-          <p>Precio: {product.price}</p>
-        </>
+        <Box>
+          <Typography> {product.name}</Typography>
+          <img src={product.image} alt={product.name} style={{width:"300px"}} />
+          <Typography>{product.description}</Typography>
+          <Typography>Precio: {product.price}</Typography>
+          <AddButton/>
+          <Button>Comprar</Button>
+          </Box>
       ) : (
-        <p>Producto no encontrado</p>
+        <Typography>Producto no encontrado</Typography>
       )}
-    </div>
+    </Container>
   );
 };
