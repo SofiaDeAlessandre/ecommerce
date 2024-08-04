@@ -5,9 +5,11 @@ import { Register } from './pages/Register';
 import { Login } from './pages/Login'
 import { CardsContainer } from './components/CardsContainer';
 import { Main } from './layout/Main';
+import { InfinitySlide } from './components/infinitySlide/InfinitySlide';
 function App() {
 return (
   <>
+  
   <Header/>
  <Main/>
   <Footer/>

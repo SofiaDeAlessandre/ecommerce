@@ -19,8 +19,9 @@ import { Cart } from './Cart';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { BsBox2 } from 'react-icons/bs';
 import { IoPlanet } from "react-icons/io5";
+import { InfinitySlide } from './infinitySlide/InfinitySlide';
 
-
+import './NavBar.css'
 
 const pages = ['Productos'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -86,7 +87,6 @@ export const NavBar = () => {
     width: '100%',
     '& .MuiInputBase-input': {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       [theme.breakpoints.up('sm')]: {
@@ -99,7 +99,7 @@ export const NavBar = () => {
   }));
 
   return (
-    <AppBar className='appBar' position="static" style={{backgroundColor:"#09030d", color:"#f8bbd0",backgroundImage: "linear-gradient(to right, #09091c,#120725, #1d0c1f)"}}>
+    <AppBar className='appBar' position="static" style={{ color:"#f8bbd0",boxShadow:"none"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Button sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -233,6 +233,7 @@ export const NavBar = () => {
           </Box>
         </Toolbar>
       </Container>
+      <InfinitySlide/>
     </AppBar>
   );
 };

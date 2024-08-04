@@ -4,9 +4,9 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: #c9b7f6;
-    background-image: url(./assets-img/nebula-img.jpg);
+     background-image: url(./assets-img/galaxy-img.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:cover; 
 }
 img {
     width: 100%;
