@@ -18,6 +18,9 @@ import { useState, useContext } from 'react';
 import { Cart } from './Cart';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { BsBox2 } from 'react-icons/bs';
+import { IoPlanet } from "react-icons/io5";
+
+
 
 const pages = ['Productos'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -96,7 +99,7 @@ export const NavBar = () => {
   }));
 
   return (
-    <AppBar position="static">
+    <AppBar className='appBar' position="static" style={{backgroundColor:"#09030d", color:"#f8bbd0",backgroundImage: "linear-gradient(to right, #09091c,#120725, #1d0c1f)"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Button sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -106,7 +109,7 @@ export const NavBar = () => {
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
-              mr: 2,
+              mr:1,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -117,7 +120,7 @@ export const NavBar = () => {
           >
             BOUTIQUE
           </Typography>
-
+          <IoPlanet />
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <GiHamburgerMenu
               style={{ fontSize: '25px' }}

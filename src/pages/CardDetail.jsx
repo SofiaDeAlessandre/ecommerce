@@ -16,7 +16,7 @@ export const CardDetail = () => {
   const product = products.find((product) => product.id === id);
 
   return (
-    <Container style={{display:"flex", justifyContent:"center"}}>
+    <Container style={{display:"flex",textAlign:"center", backgroundColor:"white", width:"auto", padding:"10px", borderRadius:"10px"}}>
       {product ? (
         <Box>
           <Typography> {product.name}</Typography>

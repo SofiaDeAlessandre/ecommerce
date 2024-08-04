@@ -5,6 +5,7 @@ import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import { Quantity } from './Quantity';
 
 export const Cart = ({ state, toggleDrawer }) => {
   const navigate = useNavigate();
@@ -14,8 +15,8 @@ export const Cart = ({ state, toggleDrawer }) => {
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      onClick={(event) => event.stopPropagation()} // Evita que se cierre al hacer clic dentro
+      onKeyDown={(event) => event.stopPropagation()}
     >
       {cart.length === 0 ? (
         <Typography>No hay productos en el carrito</Typography>
@@ -32,6 +33,7 @@ export const Cart = ({ state, toggleDrawer }) => {
             <img src={product.image} alt={product.name} width={'200px'} />
             <Typography variant="body2">{product.description}</Typography>
             <Typography variant="body2">Precio: {product.price}</Typography>
+            <Quantity/>
           </Box>
         ))
       )}

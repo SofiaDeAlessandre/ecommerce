@@ -4,6 +4,7 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(getAddedProducts('cart') || []);
+  const [quantity, SetQuantity] = useState(1)
 
   const handleAdd = (product) => {
     const newCart = [...cart, product];
@@ -17,6 +18,16 @@ export const CartProvider = ({ children }) => {
     setCart(deletedProduct);
     console.log('producto eliminado', deletedProduct);
   };
+  const handleAddQuantity = () => {
+    SetQuantity(quantity=>quantity+1)
+  }
+  const handleRemoveQuantity = () => {
+    if(quantity>0){
+      SetQuantity(quantity=>quantity-1)
+    }
+    
+
+  }
   // const handleDeleteAll = (product) => {
   //   const deletedProduct = cart.filter(
   //     (product) => product.id !== product.id
@@ -26,7 +37,7 @@ export const CartProvider = ({ children }) => {
   // };
 
   return (
-    <CartContext.Provider value={{ handleAdd, handleDelete, cart }}>
+    <CartContext.Provider value={{ handleAdd, handleDelete, cart, handleAddQuantity, quantity, handleRemoveQuantity }}>
       {children}
     </CartContext.Provider>
   );

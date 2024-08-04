@@ -3,6 +3,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #c9b7f6;
+    background-image: url(./assets-img/nebula-img.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 img {
     width: 100%;
