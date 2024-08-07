@@ -6,11 +6,24 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(getAddedProducts('cart') || []);
   const [quantity, SetQuantity] = useState(1)
 
+  // const handleAdd = (product) => {
+  //   const newCart = [...cart, product];
+  //   setCart(newCart);
+  //   console.log('carrito añadido', newCart);
+  // };
   const handleAdd = (product) => {
-    const newCart = [...cart, product];
-    setCart(newCart);
-    console.log('carrito añadido', newCart);
-  };
+		const existingProduct = cart.find((item) => item.id === product.id);
+		if (existingProduct) {
+			const updatedCart = cart.map((item) =>
+				item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+			);
+			setCart(updatedCart);
+		} else {
+			setCart([...cart, { ...product, quantity: 1 }]);
+		}
+		console.log("Carrito añadido", cart);
+	};
+
   const handleDelete = (productToDelete) => {
     const deletedProduct = cart.filter(
       (product) => product.id !== productToDelete.id
@@ -18,9 +31,19 @@ export const CartProvider = ({ children }) => {
     setCart(deletedProduct);
     console.log('producto eliminado', deletedProduct);
   };
-  const handleAddQuantity = () => {
-    SetQuantity(quantity=>quantity+1)
-  }
+  // const handleAddQuantity = () => {
+  //   SetQuantity(quantity=>quantity+1)
+  // }
+  const handleAddQuantity = (productToAdd) => {
+		const newCart = cart.map((cartProduct) =>
+			cartProduct.id === productToAdd
+				? { ...cartProduct, quantity: (cartProduct.quantity || 0) + 1 }
+				: cartProduct
+		);
+		setCart(newCart);
+		console.log(newCart, quantity);
+	};
+
   const handleRemoveQuantity = () => {
     if(quantity>0){
       SetQuantity(quantity=>quantity-1)

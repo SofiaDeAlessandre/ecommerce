@@ -18,10 +18,10 @@ import { useState, useContext } from 'react';
 import { Cart } from './Cart';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { BsBox2 } from 'react-icons/bs';
-import { IoPlanet } from "react-icons/io5";
-import { InfinitySlide } from './infinitySlide/InfinitySlide';
+import { IoPlanet } from 'react-icons/io5';
+//import { InfinitySlide } from './infinitySlide/InfinitySlide';
 
-import './NavBar.css'
+
 
 const pages = ['Productos'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -36,7 +36,10 @@ export const NavBar = () => {
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
       return;
     }
     setState({ ...state, [anchor]: open });
@@ -72,16 +75,6 @@ export const NavBar = () => {
     },
   }));
 
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }));
-
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     width: '100%',
@@ -99,7 +92,12 @@ export const NavBar = () => {
   }));
 
   return (
-    <AppBar className='appBar' position="static" style={{ color:"#f8bbd0",boxShadow:"none"}}>
+    <AppBar
+      className="appBar"
+      position="static"
+      style={{ color: '#f8bbd0', boxShadow:'rgb(141 141 141 / 76%) 0px 4px 15px',backdropFilter: 'blur(2px)',
+        backgroundColor: 'transparent', }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Button sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -109,18 +107,18 @@ export const NavBar = () => {
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
-              mr:1,
+              mr: 1,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
               textDecoration: 'none',
+              color:"#f8a6ea",
             }}
           >
             BOUTIQUE
           </Typography>
-          <IoPlanet />
+          <IoPlanet style={{color:"#d224be"}}/>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <GiHamburgerMenu
               style={{ fontSize: '25px' }}
@@ -146,7 +144,7 @@ export const NavBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Button onClick={()=>navigate('/')}>{page}</Button>
+                  <Button onClick={() => navigate('/') }>{page}</Button>
                 </MenuItem>
               ))}
             </Menu>
@@ -164,7 +162,7 @@ export const NavBar = () => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#f8a6ea',
               textDecoration: 'none',
             }}
           >
@@ -175,34 +173,37 @@ export const NavBar = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: '#f8a6ea', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
             <Search sx={{ display: 'flex', alignItems: 'center' }}>
-              <IoIosSearch style={{ fontSize: '30px' }} />
+              <IoIosSearch style={{ fontSize: '30px', color:'#f8a6ea' }} />
               <StyledInputBase
                 placeholder="Buscar…"
                 inputProps={{ 'aria-label': 'buscar' }}
+                sx={{color:'#f8a6ea'}}
               />
             </Search>
           </Box>
           <Box>
-        {user ? (
-          <Box>
-            <Typography sx={{padding:"6px"}}>Bienvenido, {user?.username}</Typography>
+            {user ? (
+              <Box>
+                <Typography sx={{ padding: '6px', color:'#f8a6ea' }}>
+                  Bienvenido, {user?.username}
+                </Typography>
+              </Box>
+            ) : (
+              ''
+            )}
           </Box>
-        ) : (
-          ''
-        )}
-      </Box>
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-          <BiCartDownload
-        style={{ fontSize: '30px' }}
-        onClick={toggleDrawer('right', true)}
-      />
-      <Cart state={state} toggleDrawer={toggleDrawer} />
+            <BiCartDownload
+              style={{ fontSize: '30px', color:'#f8a6ea' }}
+              onClick={toggleDrawer('right', true)}
+            />
+            <Cart state={state} toggleDrawer={toggleDrawer} />
             <Tooltip title="Open settings">
               <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -233,7 +234,7 @@ export const NavBar = () => {
           </Box>
         </Toolbar>
       </Container>
-      <InfinitySlide/>
+      {/* <InfinitySlide/> */}
     </AppBar>
   );
 };

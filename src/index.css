@@ -3,10 +3,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #c9b7f6;
+   background-color:#fde8fb;
      background-image: url(./assets-img/galaxy-img.jpg);
     background-repeat: no-repeat;
     background-size:cover; 
+    background-position: right;
 }
 img {
     width: 100%;

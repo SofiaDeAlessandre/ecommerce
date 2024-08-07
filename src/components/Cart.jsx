@@ -15,7 +15,7 @@ export const Cart = ({ state, toggleDrawer }) => {
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
-      onClick={(event) => event.stopPropagation()} // Evita que se cierre al hacer clic dentro
+      onClick={(event) => event.stopPropagation()} 
       onKeyDown={(event) => event.stopPropagation()}
     >
       {cart.length === 0 ? (
@@ -33,7 +33,7 @@ export const Cart = ({ state, toggleDrawer }) => {
             <img src={product.image} alt={product.name} width={'200px'} />
             <Typography variant="body2">{product.description}</Typography>
             <Typography variant="body2">Precio: {product.price}</Typography>
-            <Quantity/>
+            <Quantity key={product.id} product={product}/>
           </Box>
         ))
       )}
@@ -44,7 +44,6 @@ export const Cart = ({ state, toggleDrawer }) => {
     <div>
       {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}

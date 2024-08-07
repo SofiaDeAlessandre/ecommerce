@@ -4,13 +4,13 @@ import { CartContext } from '../context/CartContext';
 
 
 export const Quantity = ({product}) => {
-    const { handleAddQuantity, quantity, handleRemoveQuantity } = useContext(CartContext)
+    const { handleAddQuantity } = useContext(CartContext)
   return (
     <>
     <Box sx={{display:"flex", alignItems:"center"}}>
-      <Button onClick={handleAddQuantity}>+</Button>
-      <Box>{quantity}</Box>
-      <Button onClick={handleRemoveQuantity}>-</Button>
+    <Button onClick={() => handleAddQuantity(product.id)}>+</Button>
+      <Box>{product.quantity}</Box>
+      <Button>-</Button>
       </Box>
     </>
   );
