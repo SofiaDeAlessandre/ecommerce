@@ -10,10 +10,10 @@ import { Quantity } from './Quantity';
 export const Cart = ({ state, toggleDrawer }) => {
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
-  const { handleDelete } = useContext(CartContext);
+  const { handleDelete, subtotalProduct, subtotal, setSubtotal, total} = useContext(CartContext);
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, height:'100%', overflowY:'scroll'}}
       role="presentation"
       onClick={(event) => event.stopPropagation()} 
       onKeyDown={(event) => event.stopPropagation()}
@@ -34,6 +34,7 @@ export const Cart = ({ state, toggleDrawer }) => {
             <Typography variant="body2">{product.description}</Typography>
             <Typography variant="body2">Precio: {product.price}</Typography>
             <Quantity key={product.id} product={product}/>
+        <Typography>Subtotal:${subtotalProduct(product)}</Typography>
           </Box>
         ))
       )}
@@ -51,7 +52,10 @@ export const Cart = ({ state, toggleDrawer }) => {
           >
             {list(anchor)}
             {cart.length > 0 && (
-              <Button onClick={() => navigate('Login')}>Comprar</Button>
+              <Box>
+              <Typography>Subtotal: $ {subtotal} </Typography>
+              <Button onClick={() => navigate("Login")}>Comprar</Button>
+            </Box>
             )}
           </Drawer>
         </React.Fragment>

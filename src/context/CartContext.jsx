@@ -1,16 +1,20 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { getAddedProducts } from '../LocalStorage';
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(getAddedProducts('cart') || []);
   const [quantity, SetQuantity] = useState(1)
+  const [subtotal, setSubtotal] = useState(0);
 
-  // const handleAdd = (product) => {
-  //   const newCart = [...cart, product];
-  //   setCart(newCart);
-  //   console.log('carrito añadido', newCart);
-  // };
+  useEffect(() => {
+    const initialSubtotal = cart.reduce((acc, product) => {
+      return acc + (product.quantity > 0 ? product.price * product.quantity : 0);
+    }, 0);
+    setSubtotal(initialSubtotal);
+    console.log(initialSubtotal)
+  }, [cart]);
+
   const handleAdd = (product) => {
 		const existingProduct = cart.find((item) => item.id === product.id);
 		if (existingProduct) {
@@ -44,13 +48,34 @@ export const CartProvider = ({ children }) => {
 		console.log(newCart, quantity);
 	};
 
-  const handleRemoveQuantity = () => {
-    if(quantity>0){
-      SetQuantity(quantity=>quantity-1)
-    }
-    
+  
 
-  }
+  const handleRemoveQuantity = (productToRemove) => {
+    const newCart = cart.map((cartProduct) => {
+      if (cartProduct.id === productToRemove) {
+        const cartRemove = (cartProduct.quantity || 0) - 1;
+        //subtotalProduct(cartProduct.price, cartRemove);
+        return {
+          ...cartProduct,
+          quantity: cartRemove > 0 ? cartRemove : 1,
+          //price: cartRemove > 0 ? cartProduct.price : 0
+        };
+      }
+      return cartProduct;
+    });
+  
+    setCart(newCart);
+    console.log(newCart, quantity);
+  };
+  
+  const subtotalProduct = (product) => {
+    return product.price * product.quantity;
+  };
+  
+  const total = () => {
+    return cart.reduce((total, product) => total + subtotalProduct(product), 0);
+  };
+
   // const handleDeleteAll = (product) => {
   //   const deletedProduct = cart.filter(
   //     (product) => product.id !== product.id
@@ -60,7 +85,7 @@ export const CartProvider = ({ children }) => {
   // };
 
   return (
-    <CartContext.Provider value={{ handleAdd, handleDelete, cart, handleAddQuantity, quantity, handleRemoveQuantity }}>
+    <CartContext.Provider value={{ handleAdd, handleDelete, cart, handleAddQuantity, quantity, subtotalProduct, handleRemoveQuantity, setSubtotal, subtotal }}>
       {children}
     </CartContext.Provider>
   );

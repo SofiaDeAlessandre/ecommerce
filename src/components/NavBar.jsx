@@ -199,10 +199,13 @@ export const NavBar = () => {
             )}
           </Box>
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+            <Box sx={{display:'flex'}}>
             <BiCartDownload
               style={{ fontSize: '30px', color:'#f8a6ea' }}
               onClick={toggleDrawer('right', true)}
-            />
+            /> 
+            <span style={{color:'white'}}>4</span>
+            </Box>
             <Cart state={state} toggleDrawer={toggleDrawer} />
             <Tooltip title="Open settings">
               <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>

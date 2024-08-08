@@ -1,4 +1,4 @@
-@keyframes slide {
+/* @keyframes slide {
     0% {
       transform: translateX();
     }
@@ -17,5 +17,32 @@
   .list {
     animation: 40s slide infinite linear;
     display: inline-block;
-    width: 1200px;
+  } */
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .contain {
+    max-width: 400px;
+    margin: 0 auto;
+    padding-inline: 6px;
+    margin-top: 51px;
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .list {
+    display: flex;
+    align-items: center;
+    padding-inline: 6px;
+    gap: 8px;
+    font-size: 20px;
+    animation: 25s slide infinite linear;
   }
