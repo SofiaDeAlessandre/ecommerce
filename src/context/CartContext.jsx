@@ -1,5 +1,8 @@
 import { createContext, useState, useEffect } from 'react';
 import { getAddedProducts } from '../LocalStorage';
+import { collection, onSnapshot, doc, getDoc, updateDoc  } from 'firebase/firestore';
+import { db } from '../../firebase';
+
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -7,6 +10,13 @@ export const CartProvider = ({ children }) => {
   const [quantity, SetQuantity] = useState(1)
   const [subtotal, setSubtotal] = useState(0);
   //const [notificationCart, setNotificationCart] = useState(0)
+  
+  console.log(cart)
+
+
+
+
+
 
   useEffect(() => {
     const initialSubtotal = cart.reduce((acc, product) => {
@@ -94,7 +104,7 @@ export const CartProvider = ({ children }) => {
   // };
 
   return (
-    <CartContext.Provider value={{ handleAdd, handleDelete, cart, handleAddQuantity, quantity, subtotalProduct, handleRemoveQuantity, setSubtotal, subtotal }}>
+    <CartContext.Provider value={{ handleAdd, handleDelete, cart, handleAddQuantity, quantity, subtotalProduct, handleRemoveQuantity, setSubtotal, subtotal}}>
       {children}
     </CartContext.Provider>
   );

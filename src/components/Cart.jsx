@@ -7,12 +7,13 @@ import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { Quantity } from './Quantity';
 import { IoClose } from "react-icons/io5";
-
+import { FirebaseContext } from '../context/FirebaseContext';
 
 export const Cart = ({ state, toggleDrawer }) => {
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
   const { handleDelete, subtotalProduct, subtotal, setSubtotal, total} = useContext(CartContext);
+  const { user } = useContext(FirebaseContext);
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, height:'100%', overflowY:'scroll', backgroundColor:'#dbebeb'}}
@@ -56,7 +57,7 @@ export const Cart = ({ state, toggleDrawer }) => {
             {cart.length > 0 && (
               <Box>
               <Typography>Subtotal: $ {subtotal} </Typography>
-              <Button onClick={() => navigate("Login")}>Comprar</Button>
+              <Button onClick={user ? () => navigate("/CheckIn") : () => navigate("/Login")}>Comprar</Button>
             </Box>
             )}
           </Drawer>

@@ -19,7 +19,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { FirebaseContext } from '../context/FirebaseContext';
 
-
 const validationSchema = yup.object({
   email: yup
     .string()
@@ -36,6 +35,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const auth = getAuth();
   const [typePassword, setTypePassword] = useState('password');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -52,13 +52,15 @@ export const Login = () => {
           values.password
         );
         const loggedInUser = userCredential.user;
-
+        
+        console.log(isLoggedIn)
         setUser({
           id: loggedInUser.uid,
           email: loggedInUser.email,
         });
-        console.log(user)
-        // navigate('/');
+        
+        console.log(user);
+        navigate('/CheckIn');
       } catch (error) {
         console.error('Error during login:', error.code, error.message);
       }
@@ -115,18 +117,16 @@ export const Login = () => {
         }}
       />
 
-      <Button onClick={() => navigate('/CheckIn')} color="primary" variant="contained" fullWidth type="submit">
+      <Button color="primary" variant="contained" fullWidth type="submit">
         Iniciar sesión
       </Button>
       <Typography>
         Si no tienes cuenta,
         <Button onClick={() => navigate('/Register')}>REGISTRATE</Button>
       </Typography>
-            <Typography>Bienvenido {user?.username}</Typography>
-            <Typography>Id {user?.id}</Typography>
-            <Typography>Email {user?.mail}</Typography>
-          
+      <Typography>Bienvenido {user?.username}</Typography>
+      <Typography>Id {user?.id}</Typography>
+      <Typography>Email {user?.mail}</Typography>
     </Container>
   );
 };
-

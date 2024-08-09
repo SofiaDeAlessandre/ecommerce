@@ -1,15 +1,35 @@
-import { createContext, useEffect, useState } from 'react';
-import { collection, onSnapshot, doc, getDoc } from 'firebase/firestore';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { collection, onSnapshot, doc, getDoc, updateDoc, arrayUnion  } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { Box } from '@mui/material'
+
 
 export const FirebaseContext = createContext();
 
 export const FirebaseProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  // const [usuarios, setUsuarios] = useState([]);
   const [user, setUser] = useState(null);
   const auth = getAuth();
+
+
+// const finalizarCompra = async (cart) => {
+//   try {
+//     const orderReference = doc(db, "users", user.uid)
+//     console.log(cart)
+//      await updateDoc(orderReference, {
+//       orders: arrayUnion({
+//         cart: [...cart],
+//         fecha: new Date(),
+//         total: subtotal,
+//     })})
+//   } catch (err)  {
+//     console.log(err)
+//   }
+//  }
+ 
+
+
   useEffect(() => {
     const getProducts = () => {
       const collectionReference = collection(db, 'products');
@@ -22,55 +42,12 @@ export const FirebaseProvider = ({ children }) => {
       });
     };
 
-    // const getUsuarios = () => {
-    //   const collectionReference = collection(db, 'usuarios');
-    //   onSnapshot(collectionReference, (snapshot) => {
-    //     const usuariosArray = snapshot.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-    //     setUsuarios(usuariosArray);
-    //   });
-    // };
-
     getProducts();
-    // getUsuarios();
   }, []);
 
-  // const loginUser = async (data) => {
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(
-  //       auth,
-  //       data.email,
-  //       data.password
-  //     );
-  //     const loggedInUser = userCredential.user;
-  //     // Check if the user exists in Firestore
-  //     const userDocRef = doc(db, 'users', loggedInUser.uid);
-  //     const userDoc = await getDoc(userDocRef);
-
-  //     if (userDoc.exists()) {
-  //       // Retrieve user data from Firestore
-  //       const userData = {
-  //         id: loggedInUser.uid,
-  //         email: loggedInUser.email,
-  //         username: userDoc.data().username,
-  //         descripcion: userDoc.data().descripcion,
-  //         // Add more fields as needed
-  //       };
-  //       setUser(userData); 
-  //       console.log('User logged in:', userData.username);
-  //     } else {
-  //       console.error('User data not found in Firestore');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error during login:', error.code, error.message);
-  //   }
-  // };
-  
   const getUserInfo = async (uid) => {
     try {
-      const docRef = doc(db, "users", uid);
+      const docRef = doc(db, 'users', uid);
       const document = await getDoc(docRef);
       return document.data();
     } catch (err) {
@@ -85,7 +62,7 @@ export const FirebaseProvider = ({ children }) => {
           if (user) {
             const uid = user.uid;
             const userInfo = await getUserInfo(uid);
-            setUser(userInfo);
+            setUser({ ...user, ...userInfo });
           } else {
             setUser(null);
           }
@@ -98,12 +75,36 @@ export const FirebaseProvider = ({ children }) => {
     isAuth();
   }, []);
 
+  // const finalizarCompra = () =>{
+  //   console.log('hola')
+  //   return(
+  //     <Box sx={{backgroundColor:"blue"}}>Gracias por su compra</Box>
+    
+  //   )
+  // }
 
+  const finalizarCompra = async (cart, subtotal) => {
+    if (user && user.uid) {
+      try {
+        const userDocRef = doc(db, 'users', user.uid);
+        await updateDoc(userDocRef, {
+          orders: arrayUnion({
+            cart: [...cart],
+            fecha: new Date(),
+            total: subtotal,
+          }),
+        });
+        console.log('Compra finalizada y guardada en Firestore.');
+      } catch (error) {
+        console.error('Error al finalizar la compra:', error);
+  }
+    } else {
+      console.error('Usuario no autenticado.');
+    }
+  };
 
   return (
-    <FirebaseContext.Provider
-      value={{ products, setProducts, user, setUser }}
-    >
+    <FirebaseContext.Provider value={{ products, setProducts, user, setUser, finalizarCompra }}>
       {children}
     </FirebaseContext.Provider>
   );
