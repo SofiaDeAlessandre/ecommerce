@@ -19,6 +19,8 @@ import { Cart } from './Cart';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { BsBox2 } from 'react-icons/bs';
 import { IoPlanet } from 'react-icons/io5';
+import { CartContext } from '../context/CartContext';
+
 //import { InfinitySlide } from './infinitySlide/InfinitySlide';
 
 
@@ -30,6 +32,7 @@ export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { user } = useContext(FirebaseContext);
+  const { quantity } = useContext(CartContext)
 
   const [state, setState] = useState({
     right: false,
@@ -113,12 +116,12 @@ export const NavBar = () => {
               fontWeight: 700,
               letterSpacing: '.3rem',
               textDecoration: 'none',
-              color:"#f8a6ea",
+              color:"#2cf1f0",
             }}
           >
             BOUTIQUE
           </Typography>
-          <IoPlanet style={{color:"#d224be"}}/>
+          <IoPlanet style={{color:"#f8a6ea"}}/>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <GiHamburgerMenu
               style={{ fontSize: '25px' }}
@@ -162,7 +165,7 @@ export const NavBar = () => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: '#f8a6ea',
+              color:"#2cf1f0",
               textDecoration: 'none',
             }}
           >
@@ -173,24 +176,24 @@ export const NavBar = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#f8a6ea', display: 'block' }}
+                sx={{ my: 2, color: '#2cf1f0', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
             <Search sx={{ display: 'flex', alignItems: 'center' }}>
-              <IoIosSearch style={{ fontSize: '30px', color:'#f8a6ea' }} />
+              <IoIosSearch style={{ fontSize: '30px', color:'#2cf1f0' }} />
               <StyledInputBase
                 placeholder="Buscar…"
                 inputProps={{ 'aria-label': 'buscar' }}
-                sx={{color:'#f8a6ea'}}
+                sx={{color:'#2cf1f0'}}
               />
             </Search>
           </Box>
           <Box>
             {user ? (
               <Box>
-                <Typography sx={{ padding: '6px', color:'#f8a6ea' }}>
+                <Typography sx={{ padding: '6px', color:'#2cf1f0' }}>
                   Bienvenido, {user?.username}
                 </Typography>
               </Box>
@@ -201,10 +204,10 @@ export const NavBar = () => {
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Box sx={{display:'flex'}}>
             <BiCartDownload
-              style={{ fontSize: '30px', color:'#f8a6ea' }}
+              style={{ fontSize: '30px', color:'#2cf1f0' }}
               onClick={toggleDrawer('right', true)}
             /> 
-            <span style={{color:'white'}}>4</span>
+            <span style={{color:'white'}}>{quantity > 0 ? quantity : ""}</span>
             </Box>
             <Cart state={state} toggleDrawer={toggleDrawer} />
             <Tooltip title="Open settings">

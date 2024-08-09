@@ -6,6 +6,7 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(getAddedProducts('cart') || []);
   const [quantity, SetQuantity] = useState(1)
   const [subtotal, setSubtotal] = useState(0);
+  //const [notificationCart, setNotificationCart] = useState(0)
 
   useEffect(() => {
     const initialSubtotal = cart.reduce((acc, product) => {
@@ -13,6 +14,14 @@ export const CartProvider = ({ children }) => {
     }, 0);
     setSubtotal(initialSubtotal);
     console.log(initialSubtotal)
+  }, [cart]);
+
+  useEffect(() => {
+    const initialNotifications = cart.reduce((acc, product) => {
+      return acc + (product.quantity > 0 ? product.quantity : 0);
+    }, 0);
+    console.log(quantity)
+    SetQuantity(initialNotifications);
   }, [cart]);
 
   const handleAdd = (product) => {
@@ -72,9 +81,9 @@ export const CartProvider = ({ children }) => {
     return product.price * product.quantity;
   };
   
-  const total = () => {
-    return cart.reduce((total, product) => total + subtotalProduct(product), 0);
-  };
+  // const total = () => {
+  //   return cart.reduce((total, product) => total + subtotalProduct(product), 0);
+  // };
 
   // const handleDeleteAll = (product) => {
   //   const deletedProduct = cart.filter(

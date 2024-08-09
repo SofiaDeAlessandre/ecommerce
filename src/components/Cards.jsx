@@ -24,7 +24,7 @@ export const Cards = () => {
         <Box
           key={product.id}
           sx={{
-            position: 'relative', // Asegura que el contenedor tenga posición relativa
+            
            // border: '2px solid',
             borderRadius: '18px',
             width: '300px',
@@ -39,8 +39,8 @@ export const Cards = () => {
             boxShadow: 'rgb(141 141 141 / 76%) 0px 2px 7px 6px',
             overflow: 'hidden', // Para asegurarse de que el pseudo-elemento no sobresalga del contenedor
             '&::before': {
-              content: '""',
-              position: 'absolute',
+              
+              
               // top: '-20px',
               // right: '-20px',
               // bottom: '-20px',

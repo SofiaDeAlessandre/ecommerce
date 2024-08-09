@@ -6,8 +6,9 @@
    background-color:#fde8fb;
      background-image: url(./assets-img/galaxy-img.jpg);
     background-repeat: no-repeat;
-    background-size:cover; 
-    background-position: right;
+    background-size: cover; 
+    
+    
 }
 img {
     width: 100%;

@@ -50,7 +50,7 @@ export const CardDetail = () => {
           <Typography> {product.name}</Typography>
           <img src={product.image} alt={product.name} style={{width:"300px"}} />
           <Typography>{product.description}</Typography>
-          <Typography>Precio: ${product.price}</Typography>
+          <Typography>Precio: &{product.price}</Typography>
           <AddButton/>
           <Button>Comprar</Button>
           </Box>

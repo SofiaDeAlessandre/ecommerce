@@ -115,7 +115,7 @@ export const Login = () => {
         }}
       />
 
-      <Button color="primary" variant="contained" fullWidth type="submit">
+      <Button onClick={() => navigate('/CheckIn')} color="primary" variant="contained" fullWidth type="submit">
         Iniciar sesión
       </Button>
       <Typography>

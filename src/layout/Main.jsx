@@ -4,6 +4,7 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { NotFound } from "../pages/404";
 import { CardDetail } from "../pages/CardDetail"; 
+import { CheckIn } from "../pages/CheckIn";
 
 export const Main = () => {
   return (
@@ -13,6 +14,7 @@ export const Main = () => {
 <Route path="Register" element={<Register/>}/>
 <Route path="*" element={<NotFound/>}/>
 <Route path="detail/:id" element={<CardDetail />} />
+<Route path="CheckIn" element={<CheckIn />} />
 </Routes>
     
   )
