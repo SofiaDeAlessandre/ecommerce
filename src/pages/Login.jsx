@@ -18,6 +18,7 @@ import { IoMdClose } from 'react-icons/io';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { FirebaseContext } from '../context/FirebaseContext';
+import { CartContext } from '../context/CartContext';
 
 const validationSchema = yup.object({
   email: yup
@@ -36,6 +37,7 @@ export const Login = () => {
   const auth = getAuth();
   const [typePassword, setTypePassword] = useState('password');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { cart } = useContext(CartContext)
 
   const formik = useFormik({
     initialValues: {
@@ -60,7 +62,14 @@ export const Login = () => {
         });
         
         console.log(user);
-        navigate('/CheckIn');
+
+        if (cart.length === 0){
+          navigate('/')
+        }else{
+          navigate('/CheckIn');
+        }
+        console.log(cart)
+        
       } catch (error) {
         console.error('Error during login:', error.code, error.message);
       }
@@ -82,6 +91,7 @@ export const Login = () => {
       <IoMdClose onClick={() => navigate('/')} />
       <TextField
         fullWidth
+        autoComplete="email"
         id="email"
         name="email"
         label="Email"

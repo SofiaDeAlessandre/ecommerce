@@ -26,6 +26,7 @@ import { useNavigate } from 'react-router';
 import './NavBar.css'; 
 import { TbLogout } from 'react-icons/tb';
 import { getAuth, signOut } from "firebase/auth";
+import { Filter } from './Filter';
 
 
 const pages = ['Productos'];
@@ -129,7 +130,6 @@ export const NavBar = () => {
         navigate('/')
       })
       .catch((error) => {
-        // An error happened.
       });
   };
 
@@ -148,7 +148,6 @@ export const NavBar = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Button sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
          <Box sx={{display:'flex', gap:'5em'}}>
           <IoRocketSharp
         style={{
@@ -159,9 +158,6 @@ export const NavBar = () => {
       />
           <Typography
             variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 1,
               display: { xs: 'none', md: 'flex' },
@@ -176,42 +172,7 @@ export const NavBar = () => {
           </Typography>
           </Box>
          
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <GiHamburgerMenu
-              style={{ fontSize: '25px', color:'#ae39b1' }}
-              onClick={handleOpenNavMenu}
-            />
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Button onClick={() => navigate('/')}>{page}</Button>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Button sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -221,9 +182,11 @@ export const NavBar = () => {
               letterSpacing: '.3rem',
               color: '#ae39b1',
               textDecoration: 'none',
+              overflow: 'visible',
+            fontSize: {xs:'20px', md:'50px'}
             }}
           >
-            BOUTIQUE
+            TIENDA ONLINE
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -235,26 +198,18 @@ export const NavBar = () => {
                 {page}
               </Button>
             ))}
-            <Search sx={{ display: 'flex', alignItems: 'center' }}>
+            {/* <Search sx={{ display: 'flex', alignItems: 'center' }}>
               <IoIosSearch style={{ fontSize: '30px', color: '#ae39b1' }} />
               <StyledInputBase
                 placeholder="Buscar…"
                 inputProps={{ 'aria-label': 'buscar' }}
                 sx={{ color: '#ae39b1' }}
               />
-            </Search>
+            </Search> */}
+
+            <Filter/>
           </Box>
-          {/* <Box>
-            {user ? (
-              <Box>
-                <Typography sx={{ padding: '6px', color: '#ae39b1' }}>
-                  Bienvenido, {user?.username}
-                </Typography>
-              </Box>
-            ) : (
-              ''
-            )}
-          </Box> */}
+
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Box sx={{ display: 'flex' }}>
               <BiCartDownload
@@ -266,10 +221,10 @@ export const NavBar = () => {
               </span>
             </Box>
             <Cart state={state} toggleDrawer={toggleDrawer} />
-            <Tooltip title="Open settings">
-              <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <FaUser style={{ fontSize: '20px', color: '#ae39b1' }} />
-                {user ? (
+           <Tooltip title="Open settings">
+              {/* <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
+                {/* <FaUser style={{ fontSize: '20px', color: '#ae39b1' }} /> */}
+                {/* {user ? (
 										<Typography variant="p" sx={{ color: "white" }}>
 											{user.username}
 										</Typography>
@@ -277,8 +232,27 @@ export const NavBar = () => {
 										<Typography sx={{ color: "white" }}>
 											Iniciar Sesión
 										</Typography>)}
-              </Button>
-            </Tooltip>
+              </Button>*/}
+
+{user ? (
+									<Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+										<FaUser style={{ fontSize: "23px", color: "#ae39b1" }} />
+										<Typography variant="p" sx={{ color: "white" }}>
+											{user.username}
+										</Typography>
+									</Button>
+								) : (
+									<Button onClick={() => navigate("/Login")}>
+										<FaUser style={{ fontSize: "23px", color: "#ae39b1" }} />
+										<Typography sx={{ color: "white" }}>
+											Iniciar Sesión
+										</Typography>
+									</Button>
+								)}
+
+
+
+            </Tooltip> 
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -314,7 +288,6 @@ export const NavBar = () => {
           </Box>
         </Toolbar>
       </Container>
-      {/* <InfinitySlide/> */}
     </AppBar>
   );
 };

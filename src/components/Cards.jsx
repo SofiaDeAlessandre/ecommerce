@@ -5,9 +5,18 @@ import { Container, Typography, Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import '@fontsource/roboto/400.css';
-export const Cards = () => {
+export const Cards = ({ filter }) => {
   const { products } = useContext(FirebaseContext);
   const { handleAdd } = useContext(CartContext);
+
+
+
+  const filteredProduct = filter
+  ? products.filter((product) =>
+      product.name.toLowerCase().includes(filter.toLowerCase())
+    )
+  : products;
+
   return (
     <Container
       sx={{
@@ -19,13 +28,11 @@ export const Cards = () => {
         justifyContent: 'center',
       }}
     >
-      {products?.map((product) => (
-       // <Box sx={{minWidth:'300px', minHeight:'300px', backgroundColor:'blueviolet'}}>
+      {filteredProduct.length > 0 ? (
+        filteredProduct?.map((product) => (
         <Box
           key={product.id}
           sx={{
-            
-           // border: '2px solid',
             borderRadius: '18px',
             width: '300px',
             textAlign: 'center',
@@ -59,10 +66,6 @@ export const Cards = () => {
               webkitFilter: 'blur(8px)',
               filter: 'blur(2px)',
               zIndex: '1',
-
-
-
-
             },
           }}
         >
@@ -79,8 +82,9 @@ export const Cards = () => {
           <Link to={`detail/${product.id}`} sx={{color:'#059999'}}>ver más</Link>
           <Button onClick={() => handleAdd(product)} sx={{color:'#059999'}}>Añadir al carrito</Button>
         </Box>
-        //</Box>
-      ))}
+))) : (
+  <Typography variant="h6">No se encontraron productos</Typography>
+)}
     </Container>
 
   );
