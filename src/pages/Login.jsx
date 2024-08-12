@@ -73,7 +73,12 @@ export const Login = () => {
   };
 
   return (
-    <Container as="form" onSubmit={formik.handleSubmit}>
+    <Container as="form" sx={{backgroundColor:'rgba(206, 168, 231, 0.7)'  ,
+      boxShadow: '#ae39b1 0px 4px 15px', 
+        borderRadius: '30px',
+        webkitFilter: 'blur(10px)',
+        width:{xs: '70%', lg: '40%'}
+    }}  onSubmit={formik.handleSubmit}>
       <IoMdClose onClick={() => navigate('/')} />
       <TextField
         fullWidth

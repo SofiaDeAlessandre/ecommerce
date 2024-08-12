@@ -6,13 +6,14 @@ import { FirebaseContext } from '../context/FirebaseContext';
 
 
 export const CheckIn = () => {
-  const { cart, subtotalProduct, subtotal } = useContext(CartContext);
-  const { finalizarCompra } = useContext(FirebaseContext);
+  const { cart, subtotalProduct, subtotal, setCart } = useContext(CartContext);
+  const { finalizePurchase } = useContext(FirebaseContext);
   const navigate = useNavigate();
 
-  const handleFinalizarCompra = () => {
-    finalizarCompra(cart, subtotal);
+  const handlefinalizePurchase = () => {
+    finalizePurchase(cart, subtotal);
     navigate('/'); 
+    setCart([])
   };
 
   return (
@@ -40,7 +41,7 @@ export const CheckIn = () => {
         </Box>
       ))}
       <Typography>Total: $ {subtotal} </Typography>
-      <Button onClick={handleFinalizarCompra}>Finalizar compra</Button>
+      <Button onClick={handlefinalizePurchase}>Finalizar compra</Button>
     </Box>
   );
 };

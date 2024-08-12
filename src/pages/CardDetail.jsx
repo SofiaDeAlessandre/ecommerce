@@ -30,7 +30,7 @@ export const CardDetail = () => {
         transform: 'scale(1.04)',
         cursor:'pointer'
       },
-      boxShadow: 'rgb(141 141 141 / 76%) 0px 2px 7px 6px',
+      boxShadow: '#ae39b1 0px 2px 7px 6px',
       overflow: 'hidden',
       '&::before': {
         content: '""',
@@ -44,15 +44,15 @@ export const CardDetail = () => {
         webkitFilter: 'blur(8px)',
         filter: 'blur(2px)',
         zIndex: '1'}}}>
-          <Button onClick={()=>navigate('/')}>Regresar</Button>
+          <Button onClick={()=>navigate('/')} sx={{color:'#059999'}}>Regresar</Button>
       {product ? (
         <Box>
           <Typography> {product.name}</Typography>
           <img src={product.image} alt={product.name} style={{width:"300px"}} />
           <Typography>{product.description}</Typography>
-          <Typography>Precio: &{product.price}</Typography>
+          <Typography>Precio: ${product.price}</Typography>
           <AddButton/>
-          <Button>Comprar</Button>
+          <Button sx={{color:'#059999'}}>Comprar</Button>
           </Box>
       ) : (
         <Typography>Producto no encontrado</Typography>

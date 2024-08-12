@@ -16,7 +16,7 @@ const product = products.find((product) => product.id === id);
     console.log(product)
 // }
     return (
-    <Button onClick={()=>handleAdd(product)}>
+    <Button onClick={()=>handleAdd(product)} sx={{color:'#059999'}}>
      Añadir al carrito
     </Button>
   )

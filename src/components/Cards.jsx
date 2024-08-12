@@ -36,7 +36,7 @@ export const Cards = () => {
               transform: 'scale(1.04)',
               cursor:'pointer'
             },
-            boxShadow: 'rgb(141 141 141 / 76%) 0px 2px 7px 6px',
+            boxShadow: '#ae39b1 0px 2px 7px 6px',
             overflow: 'hidden', // Para asegurarse de que el pseudo-elemento no sobresalga del contenedor
             '&::before': {
               
@@ -75,10 +75,9 @@ export const Cards = () => {
           <Typography variant="h6" style={{ font: 'bold' }}>
             {product.name}
           </Typography>
-          <Typography>{product.description}</Typography>
           <Typography>${product.price}</Typography>
-          <Link to={`detail/${product.id}`}>ver más</Link>
-          <Button onClick={() => handleAdd(product)}>Añadir al carrito</Button>
+          <Link to={`detail/${product.id}`} sx={{color:'#059999'}}>ver más</Link>
+          <Button onClick={() => handleAdd(product)} sx={{color:'#059999'}}>Añadir al carrito</Button>
         </Box>
         //</Box>
       ))}

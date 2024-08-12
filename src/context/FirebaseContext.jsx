@@ -13,7 +13,7 @@ export const FirebaseProvider = ({ children }) => {
   const auth = getAuth();
 
 
-// const finalizarCompra = async (cart) => {
+// const finalizePurchase = async (cart) => {
 //   try {
 //     const orderReference = doc(db, "users", user.uid)
 //     console.log(cart)
@@ -75,7 +75,7 @@ export const FirebaseProvider = ({ children }) => {
     isAuth();
   }, []);
 
-  // const finalizarCompra = () =>{
+  // const finalizePurchase = () =>{
   //   console.log('hola')
   //   return(
   //     <Box sx={{backgroundColor:"blue"}}>Gracias por su compra</Box>
@@ -83,7 +83,7 @@ export const FirebaseProvider = ({ children }) => {
   //   )
   // }
 
-  const finalizarCompra = async (cart, subtotal) => {
+  const finalizePurchase = async (cart, subtotal) => {
     if (user && user.uid) {
       try {
         const userDocRef = doc(db, 'users', user.uid);
@@ -104,7 +104,7 @@ export const FirebaseProvider = ({ children }) => {
   };
 
   return (
-    <FirebaseContext.Provider value={{ products, setProducts, user, setUser, finalizarCompra }}>
+    <FirebaseContext.Provider value={{ products, setProducts, user, setUser, finalizePurchase }}>
       {children}
     </FirebaseContext.Provider>
   );

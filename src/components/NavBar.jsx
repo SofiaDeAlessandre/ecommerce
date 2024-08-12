@@ -18,21 +18,48 @@ import { useState, useContext } from 'react';
 import { Cart } from './Cart';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { BsBox2 } from 'react-icons/bs';
-import { IoPlanet } from 'react-icons/io5';
+import { IoPlanet, IoRocketSharp } from 'react-icons/io5';
 import { CartContext } from '../context/CartContext';
-
+import { FaUser } from 'react-icons/fa';
 //import { InfinitySlide } from './infinitySlide/InfinitySlide';
-
+import { useNavigate } from 'react-router';
+import './NavBar.css'; 
+import { TbLogout } from 'react-icons/tb';
+import { getAuth, signOut } from "firebase/auth";
 
 
 const pages = ['Productos'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Iniciar sesión', 'Historial de compra', 'Cerrar sesión'];
 
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { user } = useContext(FirebaseContext);
-  const { quantity } = useContext(CartContext)
+  const { quantity } = useContext(CartContext);
+
+  const navigate = useNavigate();
+
+
+  const handleMenuItemClick = (page) => {
+    switch (page) {
+      case 'Iniciar sesión':
+        navigate('/Login');
+        break;
+      case 'Account':
+        navigate('/account');
+        break;
+      case 'Dashboard':
+        navigate('/dashboard');
+        break;
+      case 'Logout':
+        handleSignOut()
+        console.log('Logging out...');
+        break;
+      default:
+        navigate('/'); // Navegar a la página principal por defecto
+    }
+    handleCloseUserMenu(); // Cierra el menú después de la selección
+  };
 
   const [state, setState] = useState({
     right: false,
@@ -94,16 +121,42 @@ export const NavBar = () => {
     },
   }));
 
+  
+  const handleSignOut = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        navigate('/')
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
+
   return (
     <AppBar
       className="appBar"
       position="static"
-      style={{ color: '#f8bbd0', boxShadow:'rgb(141 141 141 / 76%) 0px 4px 15px',backdropFilter: 'blur(2px)',
-        backgroundColor: 'transparent', }}
+      style={{
+        color: '#f8bbd0',
+        boxShadow: '#ae39b1 0px 4px 15px',
+        backdropFilter: 'blur(2px)',
+        backgroundColor: 'transparent',
+        padding:'10px'
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Button sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+         <Box sx={{display:'flex', gap:'5em'}}>
+          <IoRocketSharp
+        style={{
+          color: '#76ffff', 
+          fontSize: '30px',
+          animation: 'move 5s infinite',
+        }}
+      />
           <Typography
             variant="h6"
             noWrap
@@ -116,15 +169,16 @@ export const NavBar = () => {
               fontWeight: 700,
               letterSpacing: '.3rem',
               textDecoration: 'none',
-              color:"#2cf1f0",
+              color: '#ae39b1',
             }}
           >
-            BOUTIQUE
+            TIENDA ONLINE
           </Typography>
-          <IoPlanet style={{color:"#f8a6ea"}}/>
+          </Box>
+         
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <GiHamburgerMenu
-              style={{ fontSize: '25px' }}
+              style={{ fontSize: '25px', color:'#ae39b1' }}
               onClick={handleOpenNavMenu}
             />
             <Menu
@@ -147,7 +201,7 @@ export const NavBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Button onClick={() => navigate('/') }>{page}</Button>
+                  <Button onClick={() => navigate('/')}>{page}</Button>
                 </MenuItem>
               ))}
             </Menu>
@@ -165,7 +219,7 @@ export const NavBar = () => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color:"#2cf1f0",
+              color: '#ae39b1',
               textDecoration: 'none',
             }}
           >
@@ -176,43 +230,53 @@ export const NavBar = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#2cf1f0', display: 'block' }}
+                sx={{ my: 2, color: '#ae39b1', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
             <Search sx={{ display: 'flex', alignItems: 'center' }}>
-              <IoIosSearch style={{ fontSize: '30px', color:'#2cf1f0' }} />
+              <IoIosSearch style={{ fontSize: '30px', color: '#ae39b1' }} />
               <StyledInputBase
                 placeholder="Buscar…"
                 inputProps={{ 'aria-label': 'buscar' }}
-                sx={{color:'#2cf1f0'}}
+                sx={{ color: '#ae39b1' }}
               />
             </Search>
           </Box>
-          <Box>
+          {/* <Box>
             {user ? (
               <Box>
-                <Typography sx={{ padding: '6px', color:'#2cf1f0' }}>
+                <Typography sx={{ padding: '6px', color: '#ae39b1' }}>
                   Bienvenido, {user?.username}
                 </Typography>
               </Box>
             ) : (
               ''
             )}
-          </Box>
+          </Box> */}
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-            <Box sx={{display:'flex'}}>
-            <BiCartDownload
-              style={{ fontSize: '30px', color:'#2cf1f0' }}
-              onClick={toggleDrawer('right', true)}
-            /> 
-            <span style={{color:'white'}}>{quantity > 0 ? quantity : ""}</span>
+            <Box sx={{ display: 'flex' }}>
+              <BiCartDownload
+                style={{ fontSize: '30px', color: '#ae39b1' }}
+                onClick={toggleDrawer('right', true)}
+              />
+              <span style={{ color: 'white' }}>
+                {quantity > 0 ? quantity : ''}
+              </span>
             </Box>
             <Cart state={state} toggleDrawer={toggleDrawer} />
             <Tooltip title="Open settings">
               <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <FaUser style={{ fontSize: '20px', color: '#ae39b1' }} />
+                {user ? (
+										<Typography variant="p" sx={{ color: "white" }}>
+											{user.username}
+										</Typography>
+									) : (
+										<Typography sx={{ color: "white" }}>
+											Iniciar Sesión
+										</Typography>)}
               </Button>
             </Tooltip>
             <Menu
@@ -232,11 +296,21 @@ export const NavBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleMenuItemClick(setting)}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
+            <Tooltip title="Cerrar Sesión">
+							<Box>
+								<Button onClick={handleSignOut} sx={{ p: 0 }}>
+									<TbLogout style={{ fontSize: "27px", color: "#ae39b1" }} />
+								</Button>
+							</Box>
+						</Tooltip>
           </Box>
         </Toolbar>
       </Container>
