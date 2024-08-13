@@ -23,7 +23,7 @@ export const OrderHistory = () => {
                 <Typography sx={{color:'white'}}>{cart.name}</Typography>
                 <Typography sx={{color:'white'}}>{cart.price}</Typography>
                 <img style={{width:'300px'}} src={cart.image} alt={cart.name}/>
-                {/* <Typography sx={{color:'white'}}>{order.fecha}</Typography>  */}
+                 <Typography sx={{color:'white'}}>{order.fecha}</Typography> 
                 </Box>
             ))}
 

@@ -96,7 +96,7 @@ export const FirebaseProvider = ({ children }) => {
         await updateDoc(userDocRef, {
           orders: arrayUnion({
             cart: [...cart],
-            fecha: new Date(),
+            fecha: new Date().toLocaleDateString(),
             total: subtotal,
           }),
         });
