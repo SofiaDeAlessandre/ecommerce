@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { getAddedProducts } from '../LocalStorage';
+import { getAddedProducts, setCartLS } from '../LocalStorage';
 import { collection, onSnapshot, doc, getDoc, updateDoc  } from 'firebase/firestore';
 import { db } from '../../firebase';
 
@@ -12,11 +12,6 @@ export const CartProvider = ({ children }) => {
   //const [notificationCart, setNotificationCart] = useState(0)
   
   console.log(cart)
-
-
-
-
-
 
   useEffect(() => {
     const initialSubtotal = cart.reduce((acc, product) => {
@@ -33,6 +28,32 @@ export const CartProvider = ({ children }) => {
     console.log(quantity)
     SetQuantity(initialNotifications);
   }, [cart]);
+
+  useEffect(() => {
+		setCartLS(JSON.stringify(cart));
+		console.log("sin bucle");
+    const timeoutId = setTimeout(() => {
+      handleDeleteAll();
+      console.log('Carrito borrado después de 9 segundos');
+    }, 86400000);
+  
+     return () => clearTimeout(timeoutId);
+	}, [cart]);
+
+  // setTimeout(() => {
+  //   SetQuantity('')
+  //   localStorage.clear();
+  // }, 3000);
+
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     handleDeleteAll();
+  //     console.log('Carrito borrado después de 9 segundos');
+  //   }, 9000);
+  
+  //    return () => clearTimeout(timeoutId);
+  // }, [cart]);
+
 
   const handleAdd = (product) => {
 		const existingProduct = cart.find((item) => item.id === product.id);
