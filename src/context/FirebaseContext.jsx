@@ -45,25 +45,31 @@ export const FirebaseProvider = ({ children }) => {
     getProducts();
   }, []);
 
-  const getUserInfo = async (uid) => {
-    try {
-      const docRef = doc(db, 'users', uid);
-      const document = await getDoc(docRef);
-      return document.data();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  
+  // const getUserInfo = async (uid) => {
+  //   try {
+  //     const docRef = doc(db, 'users', uid);
+  //     const document = await getDoc(docRef);
+  //     return document.data();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  
 
   useEffect(() => {
     const isAuth = () => {
       onAuthStateChanged(auth, async (user) => {
         try {
-          if (user) {
-            const uid = user.uid;
-            const userInfo = await getUserInfo(uid);
+           if (user) { 
+          const uid = user.uid;
+          const userDocRef = doc(db, 'users', uid);
+          onSnapshot(userDocRef, (doc) => {
+            const userInfo = doc.data();
             setUser({ ...user, ...userInfo });
-          } else {
+          });
+
+   } else {
             setUser(null);
           }
         } catch (error) {

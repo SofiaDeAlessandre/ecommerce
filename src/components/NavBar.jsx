@@ -26,7 +26,7 @@ import { useNavigate } from 'react-router';
 import './NavBar.css'; 
 import { TbLogout } from 'react-icons/tb';
 import { getAuth, signOut } from "firebase/auth";
-import { Filter } from './Filter';
+
 
 
 const pages = ['Productos'];
@@ -46,11 +46,8 @@ export const NavBar = () => {
       case 'Iniciar sesión':
         navigate('/Login');
         break;
-      case 'Account':
-        navigate('/account');
-        break;
-      case 'Dashboard':
-        navigate('/dashboard');
+      case 'Historial de compra':
+        navigate('/OrderHistory');
         break;
       case 'Logout':
         handleSignOut()
@@ -198,16 +195,7 @@ export const NavBar = () => {
                 {page}
               </Button>
             ))}
-            {/* <Search sx={{ display: 'flex', alignItems: 'center' }}>
-              <IoIosSearch style={{ fontSize: '30px', color: '#ae39b1' }} />
-              <StyledInputBase
-                placeholder="Buscar…"
-                inputProps={{ 'aria-label': 'buscar' }}
-                sx={{ color: '#ae39b1' }}
-              />
-            </Search> */}
-
-            <Filter/>
+            
           </Box>
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>

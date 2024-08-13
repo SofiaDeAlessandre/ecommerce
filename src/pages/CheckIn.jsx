@@ -12,7 +12,7 @@ export const CheckIn = () => {
 
   const handlefinalizePurchase = () => {
     finalizePurchase(cart, subtotal);
-    navigate('/'); 
+    navigate('/Message'); 
     setCart([])
   };
 

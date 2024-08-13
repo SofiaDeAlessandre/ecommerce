@@ -95,16 +95,12 @@ export const CartProvider = ({ children }) => {
   //   return cart.reduce((total, product) => total + subtotalProduct(product), 0);
   // };
 
-  // const handleDeleteAll = (product) => {
-  //   const deletedProduct = cart.filter(
-  //     (product) => product.id !== product.id
-  //   );
-  //   setCart(deletedProduct);
-  //   console.log('producto eliminado', deletedProduct);
-  // };
+  const handleDeleteAll = () => {
+setCart([])
+  };
 
   return (
-    <CartContext.Provider value={{ handleAdd, handleDelete, cart, handleAddQuantity, quantity, subtotalProduct, handleRemoveQuantity, setSubtotal, subtotal, setCart}}>
+    <CartContext.Provider value={{ handleAdd, handleDelete, cart, handleAddQuantity, quantity, subtotalProduct, handleRemoveQuantity, setSubtotal, subtotal, setCart, handleDeleteAll}}>
       {children}
     </CartContext.Provider>
   );

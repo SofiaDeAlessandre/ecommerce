@@ -7,13 +7,15 @@ import { CardDetail } from "../pages/CardDetail";
 import { CheckIn } from "../pages/CheckIn";
 import { useContext } from "react";
 import { FirebaseContext } from "../context/FirebaseContext";
+import { Message } from "../components/Message";
+import { OrderHistory } from "../pages/OrderHistory";
+
 //import { useNavigate } from "react-router-dom";
 //import { getAuth} from 'firebase/auth';
 
 export const Main = () => {
   const { user } = useContext(FirebaseContext);
   //const Navigate = useNavigate();
-  console.log(user)
   // const auth = getAuth();
   // console.log(auth)
   return (
@@ -24,6 +26,8 @@ export const Main = () => {
 <Route path="*" element={<NotFound/>}/>
 <Route path="detail/:id" element={<CardDetail />} />
 <Route path="CheckIn" element={user ? <CheckIn /> : <Navigate to="/Login"/>} />
+<Route path="Message" element={<Message/>} />
+<Route path="OrderHistory" element={<OrderHistory/>}/>
 </Routes>
   )
 }

@@ -142,6 +142,7 @@ export const Login = () => {
       <Typography>Bienvenido {user?.username}</Typography>
       <Typography>Id {user?.id}</Typography>
       <Typography>Email {user?.mail}</Typography>
+      {/* //<Typography>orden{user?.orders.cart[1]}</Typography> */}
     </Container>
   );
 };

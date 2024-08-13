@@ -11,8 +11,7 @@ import { FirebaseContext } from '../context/FirebaseContext';
 
 export const Cart = ({ state, toggleDrawer }) => {
   const navigate = useNavigate();
-  const { cart } = useContext(CartContext);
-  const { handleDelete, subtotalProduct, subtotal, setSubtotal, total} = useContext(CartContext);
+  const { cart, handleDeleteAll, handleDelete, subtotalProduct, subtotal} = useContext(CartContext);
   const { user } = useContext(FirebaseContext);
   const list = (anchor) => (
     <Box
@@ -22,6 +21,7 @@ export const Cart = ({ state, toggleDrawer }) => {
       onKeyDown={(event) => event.stopPropagation()}
     >
       <Button onClick={toggleDrawer(anchor, false)}><IoClose /></Button>
+      <Button onClick={handleDeleteAll}>Vaciar carrito</Button>
       {cart.length === 0 ? (
         <Typography>No hay productos en el carrito</Typography>
       ) : (
