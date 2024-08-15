@@ -26,10 +26,10 @@ import { useNavigate } from 'react-router';
 import './NavBar.css'; 
 import { TbLogout } from 'react-icons/tb';
 import { getAuth, signOut } from "firebase/auth";
+import { useMediaQuery, useTheme } from '@mui/material';
 
 
-
-const pages = ['Productos'];
+const pages = ['Inicio','Productos'];
 const settings = ['Iniciar sesión', 'Historial de compra', 'Cerrar sesión'];
 
 export const NavBar = () => {
@@ -37,7 +37,8 @@ export const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { user } = useContext(FirebaseContext);
   const { quantity } = useContext(CartContext);
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
 
 
@@ -168,7 +169,38 @@ export const NavBar = () => {
             TIENDA ONLINE
           </Typography>
           </Box>
-         
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+						<GiHamburgerMenu
+							style={{ fontSize: "25px" }}
+							onClick={handleOpenNavMenu}
+						/>
+						<Menu
+							id="menu-appbar"
+							anchorEl={anchorElNav}
+							anchorOrigin={{
+								vertical: "bottom",
+								horizontal: "left",
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: "top",
+								horizontal: "left",
+							}}
+							open={Boolean(anchorElNav)}
+							onClose={handleCloseNavMenu}
+							sx={{
+								display: { xs: "block", md: "none" },
+							}}
+						>
+							{pages.map((page) => (
+								<MenuItem key={page} onClick={() =>
+                  navigate(page === 'Inicio' ? '/' : `/${page}`)
+                }>
+									<Typography textAlign="center">{page}</Typography>
+								</MenuItem>
+							))}
+						</Menu>
+					</Box>
           <Typography
             sx={{
               mr: 2,
@@ -189,7 +221,9 @@ export const NavBar = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() =>
+                  navigate(page === 'Inicio' ? '/' : `/${page}`)
+                }
                 sx={{ my: 2, color: '#ae39b1', display: 'block' }}
               >
                 {page}
@@ -210,17 +244,6 @@ export const NavBar = () => {
             </Box>
             <Cart state={state} toggleDrawer={toggleDrawer} />
            <Tooltip title="Open settings">
-              {/* <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
-                {/* <FaUser style={{ fontSize: '20px', color: '#ae39b1' }} /> */}
-                {/* {user ? (
-										<Typography variant="p" sx={{ color: "white" }}>
-											{user.username}
-										</Typography>
-									) : (
-										<Typography sx={{ color: "white" }}>
-											Iniciar Sesión
-										</Typography>)}
-              </Button>*/}
 
 {user ? (
 									<Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>

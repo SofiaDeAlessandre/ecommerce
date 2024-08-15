@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { FirebaseContext } from "../context/FirebaseContext";
 import { Message } from "../components/Message";
 import { OrderHistory } from "../pages/OrderHistory";
-
+import { Home } from "../pages/Home";
 //import { useNavigate } from "react-router-dom";
 //import { getAuth} from 'firebase/auth';
 
@@ -20,7 +20,8 @@ export const Main = () => {
   // console.log(auth)
   return (
     <Routes>
-<Route path="/" element={<CardsContainer/>}/>
+<Route path="/" element={<Home/>}/>
+<Route path="/Productos" element={<CardsContainer/>}/>
 <Route path="Login" element={<Login/>}/>
 <Route path="Register" element={<Register/>}/>
 <Route path="*" element={<NotFound/>}/>

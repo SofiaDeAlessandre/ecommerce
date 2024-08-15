@@ -1,13 +1,12 @@
 import React from 'react';
 import { useContext } from 'react';
 import { FirebaseContext } from '../context/FirebaseContext';
-import { Container, Typography, Box, Button } from '@mui/material';
+import { Container, Typography, Box} from '@mui/material';
 import { Link } from 'react-router-dom';
-import { CartContext } from '../context/CartContext';
 import '@fontsource/roboto/400.css';
 export const Cards = ({ filter }) => {
   const { products } = useContext(FirebaseContext);
-  const { handleAdd } = useContext(CartContext);
+  
 
 
 
@@ -79,8 +78,7 @@ export const Cards = ({ filter }) => {
             {product.name}
           </Typography>
           <Typography>${product.price}</Typography>
-          <Link to={`detail/${product.id}`} sx={{color:'#059999'}}>ver más</Link>
-          <Button onClick={() => handleAdd(product)} sx={{color:'#059999'}}>Añadir al carrito</Button>
+          <Link to={`/detail/${product.id}`} sx={{color:'#059999'}}>ver más</Link>
         </Box>
 ))) : (
   <Typography variant="h6">No se encontraron productos</Typography>

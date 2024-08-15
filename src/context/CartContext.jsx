@@ -40,20 +40,6 @@ export const CartProvider = ({ children }) => {
      return () => clearTimeout(timeoutId);
 	}, [cart]);
 
-  // setTimeout(() => {
-  //   SetQuantity('')
-  //   localStorage.clear();
-  // }, 3000);
-
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => {
-  //     handleDeleteAll();
-  //     console.log('Carrito borrado después de 9 segundos');
-  //   }, 9000);
-  
-  //    return () => clearTimeout(timeoutId);
-  // }, [cart]);
-
 
   const handleAdd = (product) => {
 		const existingProduct = cart.find((item) => item.id === product.id);
