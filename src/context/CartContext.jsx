@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { getAddedProducts, setCartLS } from '../LocalStorage';
+import { getAddedProducts, setCartLS,clearCartAfterTimeout } from '../LocalStorage';
 import { collection, onSnapshot, doc, getDoc, updateDoc  } from 'firebase/firestore';
 import { db } from '../../firebase';
 
@@ -12,6 +12,15 @@ export const CartProvider = ({ children }) => {
   //const [notificationCart, setNotificationCart] = useState(0)
   
   console.log(cart)
+
+  useEffect(() => {
+    // Limpiar el carrito después de 1 minuto
+    const intervalId = setInterval(() => {
+      clearCartAfterTimeout(setCart);
+    }, 60 * 1000); // Revisa cada minuto
+
+    return () => clearInterval(intervalId); // Limpiar el intervalo al desmontar
+  }, []);
 
   useEffect(() => {
     const initialSubtotal = cart.reduce((acc, product) => {
@@ -29,36 +38,52 @@ export const CartProvider = ({ children }) => {
     SetQuantity(initialNotifications);
   }, [cart]);
 
-  useEffect(() => {
-		setCartLS(JSON.stringify(cart));
-		console.log("sin bucle");
-    const timeoutId = setTimeout(() => {
-      handleDeleteAll();
-      console.log('Carrito borrado después de 9 segundos');
-    }, 86400000);
+  // useEffect(() => {
+	// 	setCartLS(JSON.stringify(cart));
+	// 	console.log("sin bucle");
+  //   const timeoutId = setTimeout(() => {
+  //     handleDeleteAll();
+  //     console.log('Carrito borrado después de 9 segundos');
+  //   }, 86400000);
   
-     return () => clearTimeout(timeoutId);
-	}, [cart]);
+  //    return () => clearTimeout(timeoutId);
+	// }, [cart]);
 
+  const currentCart = (newCart) => {
+    setCart(newCart);
+    setCartLS(newCart);
+  };
+
+  // const handleAdd = (product) => {
+	// 	const existingProduct = cart.find((item) => item.id === product.id);
+	// 	if (existingProduct) {
+	// 		const updatedCart = cart.map((item) =>
+	// 			item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+	// 		);
+	// 		setCart(updatedCart);
+	// 	} else {
+	// 		setCart([...cart, { ...product, quantity: 1 }]);
+	// 	}
+  //   currentCart(newCart);
+	// 	console.log("Carrito añadido", cart);
+	// };
 
   const handleAdd = (product) => {
-		const existingProduct = cart.find((item) => item.id === product.id);
-		if (existingProduct) {
-			const updatedCart = cart.map((item) =>
-				item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-			);
-			setCart(updatedCart);
-		} else {
-			setCart([...cart, { ...product, quantity: 1 }]);
-		}
-		console.log("Carrito añadido", cart);
-	};
+    const existingProduct = cart.find((item) => item.id === product.id);
+    const newCart = existingProduct? cart.map((item) =>item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      : [...cart, { ...product, quantity: 1 }];
+
+      currentCart(newCart);
+  };
 
   const handleDelete = (productToDelete) => {
     const deletedProduct = cart.filter(
       (product) => product.id !== productToDelete.id
     );
-    setCart(deletedProduct);
+    currentCart(deletedProduct);
     console.log('producto eliminado', deletedProduct);
   };
   // const handleAddQuantity = () => {
@@ -70,7 +95,7 @@ export const CartProvider = ({ children }) => {
 				? { ...cartProduct, quantity: (cartProduct.quantity || 0) + 1 }
 				: cartProduct
 		);
-		setCart(newCart);
+		currentCart(newCart);
 		console.log(newCart, quantity);
 	};
 
@@ -90,7 +115,7 @@ export const CartProvider = ({ children }) => {
       return cartProduct;
     });
   
-    setCart(newCart);
+    currentCart(newCart);
     console.log(newCart, quantity);
   };
   
@@ -104,6 +129,8 @@ export const CartProvider = ({ children }) => {
 
   const handleDeleteAll = () => {
 setCart([])
+localStorage.removeItem('cart');
+localStorage.removeItem('cartTimestamp');
   };
 
   return (

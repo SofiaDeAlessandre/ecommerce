@@ -35,10 +35,10 @@ const settings = ['Iniciar sesión', 'Historial de compra', 'Cerrar sesión'];
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const { user } = useContext(FirebaseContext);
+  const { user, handleFromLoginPages } = useContext(FirebaseContext);
   const { quantity } = useContext(CartContext);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+ //const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
 
 
@@ -126,6 +126,7 @@ export const NavBar = () => {
     signOut(auth)
       .then(() => {
         navigate('/')
+        handleFromLoginPages('/', false)
       })
       .catch((error) => {
       });
@@ -234,6 +235,7 @@ export const NavBar = () => {
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Box sx={{ display: 'flex' }}>
+            <Tooltip title="El carrito se vaciará en 24 hs">
               <BiCartDownload
                 style={{ fontSize: '30px', color: '#ae39b1' }}
                 onClick={toggleDrawer('right', true)}
@@ -241,9 +243,10 @@ export const NavBar = () => {
               <span style={{ color: 'white' }}>
                 {quantity > 0 ? quantity : ''}
               </span>
+              </Tooltip>
             </Box>
             <Cart state={state} toggleDrawer={toggleDrawer} />
-           <Tooltip title="Open settings">
+           <Tooltip title="Iniciar Sesión">
 
 {user ? (
 									<Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -253,7 +256,7 @@ export const NavBar = () => {
 										</Typography>
 									</Button>
 								) : (
-									<Button onClick={() => navigate("/Login")}>
+									<Button onClick={() => handleFromLoginPages("/Login", true)}>
 										<FaUser style={{ fontSize: "23px", color: "#ae39b1" }} />
 										<Typography sx={{ color: "white" }}>
 											Iniciar Sesión

@@ -25,7 +25,7 @@ export const Cart = ({ state, toggleDrawer }) => {
       {cart.length === 0 ? (
         <Typography>No hay productos en el carrito</Typography>
       ) : (
-        cart.map((product) => (
+        cart?.map((product) => (
           <Box
             key={product.id}
             sx={{ padding: 2, borderBottom: '1px solid #ddd', textAlign:'center'}}

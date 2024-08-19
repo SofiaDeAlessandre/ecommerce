@@ -127,8 +127,7 @@ export const Carousel = () => {
                 fontWeight: '500',
               }}
             >
-              Nuestros aros están diseñados para complementar tu estilo con un
-              toque de elegancia y sofisticación.
+              Nuestras lámparas están diseñadas para iluminar espacios con colores y calidez
             </Typography>
           </Box>
         </Box>

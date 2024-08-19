@@ -44,7 +44,7 @@ export const CardDetail = () => {
         webkitFilter: 'blur(8px)',
         filter: 'blur(2px)',
         zIndex: '1'}}}>
-          <Button onClick={()=>navigate('/')} sx={{color:'#059999'}}>Regresar</Button>
+          <Button onClick={()=>navigate('/Productos')} sx={{color:'#059999'}}>Regresar</Button>
       {product ? (
         <Box>
           <Typography> {product.name}</Typography>

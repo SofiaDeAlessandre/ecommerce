@@ -1,8 +1,16 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { collection, onSnapshot, doc, getDoc, updateDoc, arrayUnion  } from 'firebase/firestore';
+import {
+  collection,
+  onSnapshot,
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+} from 'firebase/firestore';
 import { db } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { Box } from '@mui/material'
+import { Box } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 
 export const FirebaseContext = createContext();
@@ -10,25 +18,25 @@ export const FirebaseContext = createContext();
 export const FirebaseProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
+  const [modal, setModal] = useState(0);
+  const [fromLoginPage, setFromLoginPage] = useState(false);
+  const navigate = useNavigate()
   const auth = getAuth();
 
-
-// const finalizePurchase = async (cart) => {
-//   try {
-//     const orderReference = doc(db, "users", user.uid)
-//     console.log(cart)
-//      await updateDoc(orderReference, {
-//       orders: arrayUnion({
-//         cart: [...cart],
-//         fecha: new Date(),
-//         total: subtotal,
-//     })})
-//   } catch (err)  {
-//     console.log(err)
-//   }
-//  }
- 
-
+  // const finalizePurchase = async (cart) => {
+  //   try {
+  //     const orderReference = doc(db, "users", user.uid)
+  //     console.log(cart)
+  //      await updateDoc(orderReference, {
+  //       orders: arrayUnion({
+  //         cart: [...cart],
+  //         fecha: new Date(),
+  //         total: subtotal,
+  //     })})
+  //   } catch (err)  {
+  //     console.log(err)
+  //   }
+  //  }
 
   useEffect(() => {
     const getProducts = () => {
@@ -45,7 +53,6 @@ export const FirebaseProvider = ({ children }) => {
     getProducts();
   }, []);
 
-  
   // const getUserInfo = async (uid) => {
   //   try {
   //     const docRef = doc(db, 'users', uid);
@@ -55,21 +62,19 @@ export const FirebaseProvider = ({ children }) => {
   //     console.log(err);
   //   }
   // };
-  
 
   useEffect(() => {
     const isAuth = () => {
       onAuthStateChanged(auth, async (user) => {
         try {
-           if (user) { 
-          const uid = user.uid;
-          const userDocRef = doc(db, 'users', uid);
-          onSnapshot(userDocRef, (doc) => {
-            const userInfo = doc.data();
-            setUser({ ...user, ...userInfo });
-          });
-
-   } else {
+          if (user) {
+            const uid = user.uid;
+            const userDocRef = doc(db, 'users', uid);
+            onSnapshot(userDocRef, (doc) => {
+              const userInfo = doc.data();
+              setUser({ ...user, ...userInfo });
+            });
+          } else {
             setUser(null);
           }
         } catch (error) {
@@ -85,7 +90,7 @@ export const FirebaseProvider = ({ children }) => {
   //   console.log('hola')
   //   return(
   //     <Box sx={{backgroundColor:"blue"}}>Gracias por su compra</Box>
-    
+
   //   )
   // }
 
@@ -103,14 +108,32 @@ export const FirebaseProvider = ({ children }) => {
         console.log('Compra finalizada y guardada en Firestore.');
       } catch (error) {
         console.error('Error al finalizar la compra:', error);
-  }
+      }
     } else {
       console.error('Usuario no autenticado.');
     }
   };
 
+  const handleFromLoginPages = (page, boolean) => {
+    navigate(page);
+    setFromLoginPage(boolean);
+    console.log(fromLoginPage);
+  };
+
   return (
-    <FirebaseContext.Provider value={{ products, setProducts, user, setUser, finalizePurchase }}>
+    <FirebaseContext.Provider
+      value={{
+        products,
+        setProducts,
+        user,
+        setUser,
+        finalizePurchase,
+        modal,
+        setModal,
+        fromLoginPage,
+        handleFromLoginPages,
+      }}
+    >
       {children}
     </FirebaseContext.Provider>
   );

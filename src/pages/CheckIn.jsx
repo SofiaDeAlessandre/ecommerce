@@ -3,18 +3,26 @@ import { CartContext } from '../context/CartContext';
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { FirebaseContext } from '../context/FirebaseContext';
-
+import { useEffect } from 'react';
 
 export const CheckIn = () => {
   const { cart, subtotalProduct, subtotal, setCart } = useContext(CartContext);
-  const { finalizePurchase } = useContext(FirebaseContext);
+  const { finalizePurchase, setModal } = useContext(FirebaseContext);
   const navigate = useNavigate();
 
   const handlefinalizePurchase = () => {
-    finalizePurchase(cart, subtotal);
-    navigate('/Message'); 
-    setCart([])
-  };
+		finalizePurchase(cart, subtotal);
+		setModal(1);
+		navigate("/modal");
+		setCart([]);
+	};
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      navigate('/');
+    }
+  }, [cart, navigate]);
+
 
   return (
     <Box sx={{ backgroundColor: 'white' }}>

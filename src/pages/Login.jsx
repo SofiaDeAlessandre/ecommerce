@@ -32,7 +32,7 @@ const validationSchema = yup.object({
 });
 
 export const Login = () => {
-  const { setUser, user } = useContext(FirebaseContext);
+  const { setUser, user, fromLoginPage, handleFromLoginPage } = useContext(FirebaseContext);
   const navigate = useNavigate();
   const auth = getAuth();
   const [typePassword, setTypePassword] = useState('password');
@@ -63,12 +63,19 @@ export const Login = () => {
         
         console.log(user);
 
-        if (cart.length === 0){
-          navigate('/')
-        }else{
-          navigate('/CheckIn');
-        }
-        console.log(cart)
+        if (
+					(fromLoginPage && cart.length === 0) ||
+					(!fromLoginPage && cart.length === 0)
+				) {
+					navigate("/");
+					console.log("si el carrito esta vacio va a home");
+				} else if (fromLoginPage && cart.length !== 0) {
+					navigate("/Productos");
+					console.log("se logea antes de finalizar compra");
+				} else if (!fromLoginPage && cart.length !== 0) {
+					navigate("/CheckIn");
+					console.log("se logea cuando finaliza la compra");
+				}
         
       } catch (error) {
         console.error('Error during login:', error.code, error.message);
@@ -88,7 +95,7 @@ export const Login = () => {
         webkitFilter: 'blur(10px)',
         width:{xs: '70%', lg: '40%'}
     }}  onSubmit={formik.handleSubmit}>
-      <IoMdClose onClick={() => navigate('/')} />
+      <IoMdClose onClick={() => handleFromLoginPage("/", false)} />
       <TextField
         fullWidth
         autoComplete="email"

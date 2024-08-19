@@ -10,7 +10,8 @@ import { db } from "../../firebase";
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { IoMdClose } from "react-icons/io";
-
+import { FirebaseContext } from "../context/FirebaseContext";
+import { useContext } from 'react';
 
 const validationSchema = yup.object({
   email: yup
@@ -29,12 +30,13 @@ export const Register = () => {
   const navigate = useNavigate()
  const auth = getAuth()
  const [typePassword, setTypePassword] = useState("password");
+ const { setModal } = useContext(FirebaseContext);
  
   const formik = useFormik({
     initialValues: {
-      nombre: 'pepito',
-      email: 'foobar@example.com',
-      password: 'foobar',
+      nombre: '',
+      email: '',
+      password: '',
     },
 
     validationSchema: validationSchema,
@@ -56,7 +58,8 @@ export const Register = () => {
           };
           await setDoc(doc(db, "users", user.id), user);
           console.log(user);
-           navigate("/Login");
+          setModal(0);
+           navigate("/Modal");
         } catch (error) {
           console.error("Error during registration: ", error.code, error.message);
         }
