@@ -19,17 +19,20 @@ export const Modal = () => {
     <>
       <Box
         sx={{
-          backgroundColor: 'white',
+          backgroundColor: '#e3e5f3',
           padding: '10px',
-          borderRadius: '10px',
           position: 'relative',
-          width: { sx: 0, sm: '100%' },
-          maxWidth: 800,
+          borderRadius: '18px',
+          width: '350px',
           margin: 'auto',
           textAlign: 'center',
           borderColor: 'white',
           transition: 'transform 0.3s ease',
-          boxShadow: '#ae39b1 0px 2px 7px 6px',
+          '&:hover': {
+            transform: 'scale(1.04)',
+            cursor: 'pointer',
+          },
+          boxShadow: '#6f7295 0px 2px 7px 6px',
           overflow: 'hidden',
         }}
       >
@@ -42,7 +45,7 @@ export const Modal = () => {
           <Button
             onClick={() => navigate('/')}
             sx={{
-              color: '#51074d',
+              color: '#6f7295',
               width: 'auto',
               fontWeight: 700,
               fontFamily: 'Spectral',

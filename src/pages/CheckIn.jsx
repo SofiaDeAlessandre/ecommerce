@@ -27,25 +27,44 @@ export const CheckIn = () => {
 
   return (
     <>
-    <Button onClick={() => navigate('/')} sx={{marginTop:'15px'}}>Regresar</Button>
-    <Typography variant="h5" sx={{color:'white', textAlign:'center'}}>Mis compras</Typography>
-    <Container
-      sx={{
+      <Button
+        onClick={() => navigate('/')}
+        sx={{
+          display: 'flex',
+          color: '#e3e5f3',
+          color: '#6f7295',
+          minWidth: '30px',
+          maxWidth: '80px',
+          alignSelf: 'center',
+          '&:hover': {
+            color: '#a9079f',
+          },
+        }}
+      >
+        Regresar
+      </Button>
+      <Typography variant="h5" sx={{ color: '#e3e5f3', textAlign: 'center' }}>
+        Mis compras
+      </Typography>
+      <Container
+        sx={{
           display: 'flex',
           flexWrap: 'wrap',
           padding: '30px',
           marginBlock: '20px,',
           gap: '3em',
           justifyContent: 'center',
-      }}
-    >
-      {cart?.map((product) => (
-        <Box
-          key={product.id}
-          sx={{
-            backgroundColor: 'white',
+          height: 'auto',
+          flexDirection: 'column',
+          width: 'auto',
+        }}
+      >
+        {cart?.map((product) => (
+          <Box
+            key={product.id}
+            sx={{
+              backgroundColor: '#e3e5f3',
               padding: '10px',
-              borderRadius: '10px',
               position: 'relative',
               borderRadius: '18px',
               width: '350px',
@@ -59,24 +78,42 @@ export const CheckIn = () => {
               },
               boxShadow: '#6f7295 0px 2px 7px 6px',
               overflow: 'hidden',
-              }}
+            }}
+          >
+            <Typography> Cantidad: {product.quantity}</Typography>
+            <Typography variant="h6" sx={{ textDecoration: 'underline' }}>
+              {product.name}
+            </Typography>
+            <img
+              src={product.image}
+              alt={product.name}
+              style={{ borderRadius: '100px', width: '100px' }}
+            />
+            <Typography>Precio: ${product.price}</Typography>
+            <Typography variant="body2">
+              Subtotal:${subtotalProduct(product)}
+            </Typography>
+          </Box>
+        ))}
+        <Typography sx={{ color: '#e3e5f3', textAlign: 'center' }}>
+          Total: $ {subtotal}{' '}
+        </Typography>
+        <Button
+          onClick={handlefinalizePurchase}
+          sx={{
+            display: 'flex',
+            margin: 'auto',
+            color: '#e3e5f3',
+            backgroundColor: '#6f7295',
+            minWidth: '30px',
+            '&:hover': {
+              color: '#a9079f',
+            },
+          }}
         >
-          <Typography> Cantidad: {product.quantity}</Typography>
-          <Typography variant="h6">{product.name}</Typography>
-          <img
-            src={product.image}
-            alt={product.name}
-            style={{ borderRadius: '100px', width: '100px' }}
-          />
-          <Typography>Precio: ${product.price}</Typography>
-          <Typography variant="body2">
-            Subtotal:${subtotalProduct(product)}
-          </Typography>
-        </Box>
-      ))}
+          Finalizar compra
+        </Button>
       </Container>
-      <Typography sx={{color:'white', textAlign:'center'}}>Total: $ {subtotal} </Typography>
-      <Button onClick={handlefinalizePurchase} sx={{display:'flex', margin:'auto'}}>Finalizar compra</Button>
     </>
   );
 };

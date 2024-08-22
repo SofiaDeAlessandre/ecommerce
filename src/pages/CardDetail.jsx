@@ -47,14 +47,14 @@ export const CardDetail = () => {
         Regresar
       </Button>
       {product ? (
-        <Box>
-          <Typography> {product.name}</Typography>
+        <Box style={{display:'flex', flexDirection:'column', gap: '6px', alignItems:'center'}}>
+          <Typography variant='h6' style={{textDecoration:'underline'}}> {product.name}</Typography>
           <img
             src={product.image}
             alt={product.name}
-            style={{ width: '300px' }}
+            style={{ width: '300px', borderRadius:'18px' }}
           />
-          <Typography>{product.description}</Typography>
+          <Typography>Descripción: {product.description}</Typography>
           <Typography>Precio: ${product.price}</Typography>
           <AddButton />
         </Box>

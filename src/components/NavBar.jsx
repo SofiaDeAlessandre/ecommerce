@@ -212,7 +212,7 @@ export const NavBar = () => {
             <Box sx={{ display: 'flex' }}>
               <Tooltip
                 title="El carrito se vaciará en 24 hs"
-                style={{ display: 'flex' }}
+                sx={{ display: 'flex' }}
               ><Box>
                 <BiCartDownload
                   className="icon"

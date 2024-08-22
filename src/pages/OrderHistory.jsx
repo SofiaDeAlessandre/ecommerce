@@ -33,7 +33,7 @@ export const OrderHistory = () => {
         {user?.orders?.map((order, index) => (
           <Box
             sx={{
-              backgroundColor: 'white',
+              backgroundColor:'#e3e5f3',
               padding: '10px',
               borderRadius: '10px',
               position: 'relative',
@@ -49,33 +49,20 @@ export const OrderHistory = () => {
               },
               boxShadow: '#6f7295 0px 2px 7px 6px',
               overflow: 'hidden',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                top: '-30px',
-                right: '-30px',
-                bottom: '-30px',
-                left: '-30px',
-                borderRadius: '30px',
-                border: '30px solid #f7f3f30d',
-                webkitFilter: 'blur(8px)',
-                filter: 'blur(2px)',
-                zIndex: '1',
-              },
             }}
             key={index}
           >
-            <Typography sx={{ color: 'black' }}>{order.total}</Typography>
+            <Typography variant='h6' sx={{ color: 'black' }}>Precio total de la compra: ${order.total}</Typography>
             {order?.cart?.map((cart, index) => (
-              <Box key={index}>
+              <Box key={index} sx={{display:'flex', flexDirection:'column', gap:'6px', alignItems:'center'}}>
+                <Typography variant='h5' sx={{ color: 'black', textDecoration:'underline' }}>{cart.name}</Typography>
                 <Typography sx={{ color: 'black' }}>
-                  {cart.description}
+                  Descripción: {cart.description}
                 </Typography>
-                <Typography sx={{ color: 'black' }}>{cart.quantity}</Typography>
-                <Typography sx={{ color: 'black' }}>{cart.name}</Typography>
-                <Typography sx={{ color: 'black' }}>{cart.price}</Typography>
+                <Typography sx={{ color: 'black' }}>Cantidad: {cart.quantity}</Typography>
+                <Typography sx={{ color: 'black' }}>Precio por unidad: ${cart.price}</Typography>
                 <img
-                  style={{ width: '300px' }}
+                  style={{ width: '300px', borderRadius:'16px' }}
                   src={cart.image}
                   alt={cart.name}
                 />

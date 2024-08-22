@@ -32,7 +32,7 @@ export const Cards = ({ filter }) => {
               borderRadius: '18px',
               width: '300px',
               textAlign: 'center',
-              backgroundColor: 'white',
+              backgroundColor: '#e3e5f3',
               borderColor: 'white',
               transition: 'transform 0.3s ease',
               '&:hover': {
@@ -40,18 +40,7 @@ export const Cards = ({ filter }) => {
                 cursor: 'pointer',
               },
               boxShadow: '#6f7295 0px 2px 7px 6px',
-              overflow: 'hidden',
-              '&::before': {
-                top: '-30px',
-                right: '-30px',
-                bottom: '-30px',
-                left: '-30px,',
-                borderRadius: '30px',
-                border: '30px solid #f7f3f30d',
-                webkitFilter: 'blur(8px)',
-                filter: 'blur(2px)',
-                zIndex: '1',
-              },
+              overflow: 'hidden'
             }}
           >
             <img
@@ -63,10 +52,10 @@ export const Cards = ({ filter }) => {
               {product.name}
             </Typography>
             <Typography>${product.price}</Typography>
-            <Link to={`/detail/${product.id}`}>ver más</Link>
+            <Link to={`/detail/${product.id}`} style={{textDecoration:'none'}}>ver más</Link>
           </Box>
         ))
-      ) : (
+      ) : ( 
         <Typography variant="h6" style={{ color: '#6f7295' }}>
           No se encontraron productos
         </Typography>

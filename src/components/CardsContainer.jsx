@@ -33,8 +33,8 @@ export const CardsContainer = () => {
       ) : (
         <>
           <Filter setFilter={setFilter} />
-          <Cards filter={filter} />
-        </>
+         <Cards filter={filter} />
+          </>
       )}
     </>
   );
