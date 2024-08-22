@@ -3,10 +3,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-image: url('./assets-img/galaxy-img.jpg');
+    background-image: url('./assets-img/pexels-alexandrep-junior-7736101.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: #020522ca;
+    background-color: #0205229e;
   background-blend-mode: overlay;    
 }
 img {

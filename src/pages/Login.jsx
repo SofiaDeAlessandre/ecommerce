@@ -23,12 +23,12 @@ import { CartContext } from '../context/CartContext';
 const validationSchema = yup.object({
   email: yup
     .string()
-    .email('Enter a valid email')
-    .required('Email is required'),
+    .email('Ingresa un email válido')
+    .required('Ingresa un email válido'),
   password: yup
     .string()
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
+    .min(8, 'La contraseña debe tener un mínimo de 8 caracteres')
+    .required('Ingrese una contraseña válida'),
 });
 
 export const Login = () => {
@@ -89,13 +89,17 @@ export const Login = () => {
   };
 
   return (
-    <Container as="form" sx={{backgroundColor:'rgba(206, 168, 231, 0.7)'  ,
-      boxShadow: '#ae39b1 0px 4px 15px', 
+    <Container as="form" sx={{backgroundColor:'#e3e5f3',
+      background:'transparent',
+      boxShadow: '#ae39b1 0px 4px 15px',  
         borderRadius: '30px',
         webkitFilter: 'blur(10px)',
-        width:{xs: '70%', lg: '40%'}
+        width:{xs: '70%', lg: '40%'},
+        display:'flex',
+        flexDirection:'column',
+        gap:'6px'
     }}  onSubmit={formik.handleSubmit}>
-      <IoMdClose onClick={() => handleFromLoginPages("/", false)} />
+      <IoMdClose onClick={() => handleFromLoginPages("/", false)} style={{color:'#6f7295'}} />
       <TextField
         fullWidth
         autoComplete="email"
@@ -107,6 +111,28 @@ export const Login = () => {
         onBlur={formik.handleBlur}
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={formik.touched.email && formik.errors.email}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#6f7295', 
+            },
+            '&:hover fieldset': {
+              borderColor: '#6f7295',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#6f7295', 
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#6f7295', 
+          },
+          '& .MuiInputLabel-root.Mui-focused': {
+            color: '#6f7295', 
+          },
+          '& .MuiInputBase-input': {
+            color: '#e3e5f3',
+          },
+        }}
       />
 
       <TextField
@@ -137,19 +163,42 @@ export const Login = () => {
             </InputAdornment>
           ),
         }}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#6f7295', 
+            },
+            '&:hover fieldset': {
+              borderColor: '#6f7295',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#6f7295', 
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#6f7295', 
+          },
+          '& .MuiInputLabel-root.Mui-focused': {
+            color: '#6f7295', 
+          },
+          '& .MuiInputBase-input': {
+            color: '#e3e5f3',
+          },
+        }}
       />
 
-      <Button color="primary" variant="contained" fullWidth type="submit">
+      <Button color="primary" fullWidth type="submit" sx={{background:'transparent', width:'30%', margin:'auto', color:'#6f7295', '&:hover': {
+                  color: '#a9079f',
+                }}}>
         Iniciar sesión
       </Button>
-      <Typography>
+      <Typography style={{color:'#e3e5f3'}}>
         Si no tienes cuenta,
-        <Button onClick={() => navigate('/Register')}>REGISTRATE</Button>
+        <Button onClick={() => navigate('/Register')}sx={{color:'#6f7295', '&:hover': {
+                  color: '#a9079f',
+                }}}>REGISTRATE</Button>
       </Typography>
-      <Typography>Bienvenido {user?.username}</Typography>
-      <Typography>Id {user?.id}</Typography>
-      <Typography>Email {user?.mail}</Typography>
-      {/* //<Typography>orden{user?.orders.cart[1]}</Typography> */}
+      <Typography style={{color:'#e3e5f3'}}>Bienvenido {user?.username}</Typography>
     </Container>
   );
 };

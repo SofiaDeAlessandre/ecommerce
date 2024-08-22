@@ -15,13 +15,13 @@ import { useContext } from 'react';
 
 const validationSchema = yup.object({
   email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
+    .string('Ingresa tu email')
+    .email('Ingresa un email válido')
+    .required('Ingresa un email válido'),
   password: yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
+    .string('Ingresa tu contraseña')
+    .min(8, 'La contraseña debe tener un mínimo de 8 caracteres')
+    .required('Ingresa una contraseña válida'),
 });
 
 
@@ -67,23 +67,49 @@ export const Register = () => {
     });
   
   return (
-    <Container as="form" sx={{backgroundColor:'rgba(206, 168, 231, 0.7)'  ,
+    <Container as="form" sx={{backgroundColor:'#e3e5f3',
+      background:'transparent',
       boxShadow: '#ae39b1 0px 4px 15px', 
         borderRadius: '30px',
         webkitFilter: 'blur(10px)',
-        width:{xs: '70%', lg: '40%'}
+        width:{xs: '70%', lg: '40%'},
+        display:'flex',
+        flexDirection:'column',
+        gap:'6px'
     }}  onSubmit={formik.handleSubmit}>
-       <IoMdClose onClick={()=>navigate('/')}/> 
+       <IoMdClose onClick={()=>navigate('/')} style={{color:'#6f7295'}}/> 
          <TextField
         fullWidth
         id="nombre"
         name="nombre"
-        label="nombre"
+        label="Nombre"
         value={formik.values.nombre}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.nombre && Boolean(formik.errors.nombre)}
         helperText={formik.touched.nombre && formik.errors.nombre}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#6f7295', 
+            },
+            '&:hover fieldset': {
+              borderColor: '#6f7295',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#6f7295', 
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#6f7295', 
+          },
+          '& .MuiInputLabel-root.Mui-focused': {
+            color: '#6f7295', 
+          },
+          '& .MuiInputBase-input': {
+            color: '#e3e5f3',
+          },
+        }}
       />
       <TextField
         fullWidth
@@ -95,6 +121,28 @@ export const Register = () => {
         onBlur={formik.handleBlur}
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={formik.touched.email && formik.errors.email}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#6f7295', 
+            },
+            '&:hover fieldset': {
+              borderColor: '#6f7295',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#6f7295', 
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#6f7295', 
+          },
+          '& .MuiInputLabel-root.Mui-focused': {
+            color: '#6f7295', 
+          },
+          '& .MuiInputBase-input': {
+            color: '#e3e5f3',
+          },
+        }}
       />
       <TextField
         fullWidth
@@ -120,14 +168,37 @@ export const Register = () => {
               </InputAdornment>
             ),
           }}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: '#6f7295', 
+              },
+              '&:hover fieldset': {
+                borderColor: '#6f7295',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#6f7295', 
+              },
+            },
+            '& .MuiInputLabel-root': {
+              color: '#6f7295', 
+            },
+            '& .MuiInputLabel-root.Mui-focused': {
+              color: '#6f7295', 
+            },
+            '& .MuiInputBase-input': {
+              color: '#e3e5f3',
+            },
+          }}
       />
-      <Button color="primary" variant="contained" fullWidth type="submit">
+      <Button  type="submit" sx={{background:'transparent', width:'30%', margin:'auto', color:'#6f7295', '&:hover': {
+                  color: '#a9079f',
+                }}}>
         Registrarse
       </Button>
-      <Typography>Si ya tienes cuenta, <Button onClick={()=>navigate("/Login")}>inicia sesión</Button></Typography>
+      <Typography style={{color:'#e3e5f3'}}>Si ya tienes cuenta, <Button onClick={()=>navigate("/Login")} sx={{color:'#6f7295', '&:hover': {
+                  color: '#a9079f',
+                }}}>inicia sesión</Button></Typography>
     </Container>
   );
 }
-
-
-//__________________________________________________________________

@@ -197,52 +197,12 @@ export const NavBar = () => {
               fontWeight: 700,
               letterSpacing: '.3rem',
               textDecoration: 'none',
-              color: '#e3e5f3',
+              color: '#6f7295',
             }}
           >
             SD BOUTIQUE
           </Typography>
           </Box>
-          {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-						<GiHamburgerMenu
-							style={{ fontSize: "25px" }}
-							onClick={handleOpenNavMenu}
-						/>
-						<Menu
-							id="menu-appbar"
-							anchorEl={anchorElNav}
-							anchorOrigin={{
-								vertical: "bottom",
-								horizontal: "left",
-							}}
-							keepMounted
-							transformOrigin={{
-								vertical: "top",
-								horizontal: "left",
-							}}
-							open={Boolean(anchorElNav)}
-							onClose={handleCloseNavMenu}
-							sx={{
-								display: { xs: "block", md: "none" },
-							}}
-						>
-							{pages.map((page) => (
-								<MenuItem key={page} onClick={() =>
-                  handleNavMenuItemClick(page)
-                }>
-									<Typography textAlign="center">{page}</Typography>
-								</MenuItem>
-							))}
-						</Menu>
-					</Box> */}
-          {/* <IoRocketSharp
-        style={{
-          display: { xs: 'none', md: 'flex' },
-          color: '#76ffff', 
-          fontSize: '30px',
-          animation: 'move 5s infinite',
-        }}
-       /> */}
           <Typography
             sx={{
               mr: 2,
@@ -251,7 +211,7 @@ export const NavBar = () => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: '#e3e5f3',
+              color: '#6f7295',
               textDecoration: 'none',
               overflow: 'visible',
             fontSize: {xs:'20px', md:'50px'}
@@ -294,7 +254,7 @@ export const NavBar = () => {
 {user ? (
 									<Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Box style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-										<FaUser className='icon' />
+										<FaUser className='icon' style={{marginTop:'25px'}} />
 										<Typography variant="p" sx={{ color: "white" }}>
 											{user.username}
 										</Typography>

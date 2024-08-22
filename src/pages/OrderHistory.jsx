@@ -32,7 +32,7 @@ export const OrderHistory = () => {
                 transform: 'scale(1.04)',
                 cursor:'pointer'
               },
-              boxShadow: '#ae39b1 0px 2px 7px 6px',
+              boxShadow: '#6f7295 0px 2px 7px 6px',
               overflow: 'hidden',
               '&::before': {
                 content: '""',
