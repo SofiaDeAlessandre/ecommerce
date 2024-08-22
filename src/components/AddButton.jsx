@@ -11,7 +11,8 @@ export const AddButton = () => {
 
   const product = products.find((product) => product.id === id);
   return (
-    <Button onClick={() => handleAdd(product)} sx={{ color: '#059999' }}>
+    <Button onClick={() => handleAdd(product)} sx={{ color: '#6f7295','&:hover': {
+                  color: '#a9079f'}}}>
       Añadir al carrito
     </Button>
   );

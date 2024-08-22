@@ -2,11 +2,11 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Box, Typography } from '@mui/material';
-import './Carousel.css'
+import './Carousel.css';
 
-import lamp1 from '../assets-img/lamp-carousel.webp'
-import lamp2 from '../assets-img/lamp-carousel2.jpg'
-import lamp3  from '../assets-img/lamp-carousel3.webp'
+import lamp1 from '../assets-img/lamp-carousel.webp';
+import lamp2 from '../assets-img/lamp-carousel2.jpg';
+import lamp3 from '../assets-img/lamp-carousel3.webp';
 
 export const Carousel = () => {
   const settings = {
@@ -41,7 +41,7 @@ export const Carousel = () => {
                 fontSize: '1.5rem',
                 fontWeight: '800',
                 textAlign: 'center',
-                color: 'white'
+                color: 'white',
               }}
             >
               3 y 6 cuotas sin interés
@@ -52,7 +52,7 @@ export const Carousel = () => {
                 fontSize: '1.1rem',
                 fontWeight: '500',
                 textAlign: 'center',
-                color: 'white'
+                color: 'white',
               }}
             >
               Envío en 24 Horas
@@ -75,7 +75,7 @@ export const Carousel = () => {
                 fontSize: '1.5rem',
                 fontWeight: '500',
                 textAlign: 'center',
-                color: 'white'
+                color: 'white',
               }}
             >
               20% de descuento abonando en efectivo
@@ -85,7 +85,7 @@ export const Carousel = () => {
                 fontSize: '1.2rem',
                 textAlign: 'center',
                 fontWeight: '500',
-                color: 'white'
+                color: 'white',
               }}
             >
               En la segunda unidad
@@ -109,7 +109,7 @@ export const Carousel = () => {
                 fontSize: '1.5rem',
                 fontWeight: '800',
                 textAlign: 'center',
-                color: 'white'
+                color: 'white',
               }}
             >
               ¡Ilumina tus espacios!
@@ -120,10 +120,11 @@ export const Carousel = () => {
                 fontSize: '1.2rem',
                 textAlign: 'center',
                 fontWeight: '500',
-                color: 'white'
+                color: 'white',
               }}
             >
-              Nuestras lámparas están diseñadas para iluminar espacios con colores y calidez
+              Nuestras lámparas están diseñadas para iluminar espacios con
+              colores y calidez
             </Typography>
           </Box>
         </Box>

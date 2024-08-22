@@ -32,12 +32,13 @@ const validationSchema = yup.object({
 });
 
 export const Login = () => {
-  const { setUser, user, fromLoginPage, handleFromLoginPages } = useContext(FirebaseContext);
+  const { setUser, user, fromLoginPage, handleFromLoginPages } =
+    useContext(FirebaseContext);
   const navigate = useNavigate();
   const auth = getAuth();
   const [typePassword, setTypePassword] = useState('password');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { cart } = useContext(CartContext)
+  const { cart } = useContext(CartContext);
 
   const formik = useFormik({
     initialValues: {
@@ -54,52 +55,51 @@ export const Login = () => {
           values.password
         );
         const loggedInUser = userCredential.user;
-        
-        console.log(isLoggedIn)
         setUser({
           id: loggedInUser.uid,
           email: loggedInUser.email,
         });
-        
-        console.log(user);
 
         if (
-					(fromLoginPage && cart.length === 0) ||
-					(!fromLoginPage && cart.length === 0)
-				) {
-					navigate("/");
-					console.log("si el carrito esta vacio va a home");
-				} else if (fromLoginPage && cart.length !== 0) {
-					navigate("/Productos");
-					console.log("se logea antes de finalizar compra");
-				} else if (!fromLoginPage && cart.length !== 0) {
-					navigate("/CheckIn");
-					console.log("se logea cuando finaliza la compra");
-				}
-        
+          (fromLoginPage && cart.length === 0) ||
+          (!fromLoginPage && cart.length === 0)
+        ) {
+          navigate('/');
+        } else if (fromLoginPage && cart.length !== 0) {
+          navigate('/Productos');
+        } else if (!fromLoginPage && cart.length !== 0) {
+          navigate('/CheckIn');
+        }
       } catch (error) {
         console.error('Error during login:', error.code, error.message);
       }
     },
   });
   const handleEmailChange = (event) => {
-    // Limpiar el usuario anterior al cambiar el campo de correo electrónico
     setUser(null);
     formik.handleChange(event);
   };
 
   return (
-    <Container as="form" sx={{backgroundColor:'#e3e5f3',
-      background:'transparent',
-      boxShadow: '#ae39b1 0px 4px 15px',  
+    <Container
+      as="form"
+      sx={{
+        backgroundColor: '#e3e5f3',
+        background: 'transparent',
+        boxShadow: '#ae39b1 0px 4px 15px',
         borderRadius: '30px',
         webkitFilter: 'blur(10px)',
-        width:{xs: '70%', lg: '40%'},
-        display:'flex',
-        flexDirection:'column',
-        gap:'6px'
-    }}  onSubmit={formik.handleSubmit}>
-      <IoMdClose onClick={() => handleFromLoginPages("/", false)} style={{color:'#6f7295'}} />
+        width: { xs: '70%', lg: '40%' },
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '6px',
+      }}
+      onSubmit={formik.handleSubmit}
+    >
+      <IoMdClose
+        onClick={() => handleFromLoginPages('/', false)}
+        style={{ color: '#6f7295' }}
+      />
       <TextField
         fullWidth
         autoComplete="email"
@@ -114,20 +114,20 @@ export const Login = () => {
         sx={{
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: '#6f7295', 
+              borderColor: '#6f7295',
             },
             '&:hover fieldset': {
               borderColor: '#6f7295',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#6f7295', 
+              borderColor: '#6f7295',
             },
           },
           '& .MuiInputLabel-root': {
-            color: '#6f7295', 
+            color: '#6f7295',
           },
           '& .MuiInputLabel-root.Mui-focused': {
-            color: '#6f7295', 
+            color: '#6f7295',
           },
           '& .MuiInputBase-input': {
             color: '#e3e5f3',
@@ -166,20 +166,20 @@ export const Login = () => {
         sx={{
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: '#6f7295', 
+              borderColor: '#6f7295',
             },
             '&:hover fieldset': {
               borderColor: '#6f7295',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#6f7295', 
+              borderColor: '#6f7295',
             },
           },
           '& .MuiInputLabel-root': {
-            color: '#6f7295', 
+            color: '#6f7295',
           },
           '& .MuiInputLabel-root.Mui-focused': {
-            color: '#6f7295', 
+            color: '#6f7295',
           },
           '& .MuiInputBase-input': {
             color: '#e3e5f3',
@@ -187,18 +187,39 @@ export const Login = () => {
         }}
       />
 
-      <Button color="primary" fullWidth type="submit" sx={{background:'transparent', width:'30%', margin:'auto', color:'#6f7295', '&:hover': {
-                  color: '#a9079f',
-                }}}>
+      <Button
+        color="primary"
+        fullWidth
+        type="submit"
+        sx={{
+          background: 'transparent',
+          width: '30%',
+          margin: 'auto',
+          color: '#6f7295',
+          '&:hover': {
+            color: '#a9079f',
+          },
+        }}
+      >
         Iniciar sesión
       </Button>
-      <Typography style={{color:'#e3e5f3'}}>
+      <Typography style={{ color: '#e3e5f3' }}>
         Si no tienes cuenta,
-        <Button onClick={() => navigate('/Register')}sx={{color:'#6f7295', '&:hover': {
-                  color: '#a9079f',
-                }}}>REGISTRATE</Button>
+        <Button
+          onClick={() => navigate('/Register')}
+          sx={{
+            color: '#6f7295',
+            '&:hover': {
+              color: '#a9079f',
+            },
+          }}
+        >
+          REGISTRATE
+        </Button>
       </Typography>
-      <Typography style={{color:'#e3e5f3'}}>Bienvenido {user?.username}</Typography>
+      <Typography style={{ color: '#e3e5f3' }}>
+        Bienvenido {user?.username}
+      </Typography>
     </Container>
   );
 };

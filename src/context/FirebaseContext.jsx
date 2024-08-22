@@ -1,17 +1,14 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import {
   collection,
   onSnapshot,
   doc,
-  getDoc,
   updateDoc,
   arrayUnion,
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { Box } from '@mui/material';
 import { useNavigate } from 'react-router';
-
 
 export const FirebaseContext = createContext();
 
@@ -20,23 +17,8 @@ export const FirebaseProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [modal, setModal] = useState(0);
   const [fromLoginPage, setFromLoginPage] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const auth = getAuth();
-
-  // const finalizePurchase = async (cart) => {
-  //   try {
-  //     const orderReference = doc(db, "users", user.uid)
-  //     console.log(cart)
-  //      await updateDoc(orderReference, {
-  //       orders: arrayUnion({
-  //         cart: [...cart],
-  //         fecha: new Date(),
-  //         total: subtotal,
-  //     })})
-  //   } catch (err)  {
-  //     console.log(err)
-  //   }
-  //  }
 
   useEffect(() => {
     const getProducts = () => {
@@ -52,16 +34,6 @@ export const FirebaseProvider = ({ children }) => {
 
     getProducts();
   }, []);
-
-  // const getUserInfo = async (uid) => {
-  //   try {
-  //     const docRef = doc(db, 'users', uid);
-  //     const document = await getDoc(docRef);
-  //     return document.data();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   useEffect(() => {
     const isAuth = () => {
@@ -79,20 +51,11 @@ export const FirebaseProvider = ({ children }) => {
           }
         } catch (error) {
           setUser(null);
-          console.error('Error during authentication:', error);
         }
       });
     };
     isAuth();
   }, []);
-
-  // const finalizePurchase = () =>{
-  //   console.log('hola')
-  //   return(
-  //     <Box sx={{backgroundColor:"blue"}}>Gracias por su compra</Box>
-
-  //   )
-  // }
 
   const finalizePurchase = async (cart, subtotal) => {
     if (user && user.uid) {
@@ -105,7 +68,6 @@ export const FirebaseProvider = ({ children }) => {
             total: subtotal,
           }),
         });
-        console.log('Compra finalizada y guardada en Firestore.');
       } catch (error) {
         console.error('Error al finalizar la compra:', error);
       }
@@ -117,7 +79,6 @@ export const FirebaseProvider = ({ children }) => {
   const handleFromLoginPages = (page, boolean) => {
     navigate(page);
     setFromLoginPage(boolean);
-    console.log(fromLoginPage);
   };
 
   return (

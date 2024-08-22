@@ -1,32 +1,34 @@
-#root{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-image: url('./assets-img/pexels-alexandrep-junior-7736101.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #0205229e;
-  background-blend-mode: overlay;    
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url('./assets-img/pexels-alexandrep-junior-7736101.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #0205229e;
+  background-blend-mode: overlay;
 }
 img {
-    width: 100%;
-  }
-  .icon {
-    font-size: 27px;
-    color: #e3e5f3;
-    transition: color 0.3s;
-  }
-  
-  .icon:hover {
-    color: #a9079f;
-  }
+  width: 100%;
+}
 
-  .iconsFooter {
-    font-size: 20px;
-    color: #e3e5f3;
-    transition: color 0.3s;
-  }
-  .iconsFooter:hover {
-    color: #a9079f;
-  }
+.icon {
+  font-size: 27px;
+  color: #e3e5f3;
+  transition: color 0.3s;
+}
+
+.icon:hover {
+  color: #a9079f;
+}
+
+.iconsFooter {
+  font-size: 20px;
+  color: #e3e5f3;
+  transition: color 0.3s;
+}
+
+.iconsFooter:hover {
+  color: #a9079f;
+}

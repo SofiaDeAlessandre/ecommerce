@@ -6,14 +6,6 @@ export const Filter = ({ setFilter }) => {
   };
 
   return (
-    // <Box sx={{ margin: '20px auto', display:'block'}}>
-    //   <TextField
-    //     variant="outlined"
-    //     label="Buscar Producto"
-    //     onChange={handleChange}
-    //     sx={{border:'white'}}
-    //   />
-    // </Box>
     <Box sx={{ margin: '20px auto' }}>
       <TextField
         variant="outlined"
@@ -50,4 +42,3 @@ export const Filter = ({ setFilter }) => {
     </Box>
   );
 };
-
