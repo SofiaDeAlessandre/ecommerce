@@ -23,10 +23,10 @@ import { CartContext } from '../context/CartContext';
 import { FaUser } from 'react-icons/fa';
 //import { InfinitySlide } from './infinitySlide/InfinitySlide';
 import { useNavigate } from 'react-router';
-import './NavBar.css'; 
 import { TbLogout } from 'react-icons/tb';
 import { getAuth, signOut } from "firebase/auth";
 import { useMediaQuery, useTheme } from '@mui/material';
+import navImg from '../assets-img/galaxy-img.jpg'
 
 
 const pages = ['Inicio','Productos'];
@@ -104,23 +104,27 @@ export const NavBar = () => {
     },
   }));
 
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    width: '100%',
-    '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create('width'),
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch',
-        },
-      },
-    },
-  }));
+  // const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  //   color: 'inherit',
+  //   width: '100%',
+  //   '& .MuiInputBase-input': {
+  //     padding: theme.spacing(1, 1, 1, 0),
+  //     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+  //     transition: theme.transitions.create('width'),
+  //     [theme.breakpoints.up('sm')]: {
+  //       width: '12ch',
+  //       '&:focus': {
+  //         width: '20ch',
+  //       },
+  //     },
+  //   },
+  // }));
 
-  
+  const handleNavMenuItemClick = (page) => {
+    navigate(page === 'Inicio' ? '/' : `/${page}`);
+    handleCloseNavMenu();
+  };
+
   const handleSignOut = () => {
     const auth = getAuth();
     signOut(auth)
@@ -138,8 +142,9 @@ export const NavBar = () => {
       className="appBar"
       position="static"
       style={{
+        background:'transparent',
         color: '#f8bbd0',
-        boxShadow: '#ae39b1 0px 4px 15px',
+        boxShadow: 'rgb(190 195 253) 0px 4px 15px',
         backdropFilter: 'blur(2px)',
         backgroundColor: 'transparent',
         padding:'10px'
@@ -147,14 +152,42 @@ export const NavBar = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-         <Box sx={{display:'flex', gap:'5em'}}>
-          <IoRocketSharp
-        style={{
-          color: '#76ffff', 
-          fontSize: '30px',
-          animation: 'move 5s infinite',
-        }}
-      />
+         <Box sx={{display:'flex'}}>
+         <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+						<GiHamburgerMenu
+							style={{ fontSize: "25px", marginTop: '7px', color: '#e3e5f3' }}
+							onClick={handleOpenNavMenu}
+						/>
+						<Menu
+							id="menu-appbar"
+							anchorEl={anchorElNav}
+							anchorOrigin={{
+								vertical: "bottom",
+								horizontal: "left",
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: "top",
+								horizontal: "left",
+							}}
+							open={Boolean(anchorElNav)}
+							onClose={handleCloseNavMenu}
+							sx={{
+								display: { xs: "block", md: "none" },
+							}}
+						>
+							{pages.map((page) => (
+								<MenuItem key={page} onClick={() =>
+                  handleNavMenuItemClick(page)
+                }>
+									<Typography textAlign="center">{page}</Typography>
+								</MenuItem>
+							))}
+						</Menu>
+					</Box>
+          <Box style={{display: { xs: 'none', md: 'flex' }}}>
+       </Box>
+      
           <Typography
             variant="h6"
             sx={{
@@ -164,13 +197,13 @@ export const NavBar = () => {
               fontWeight: 700,
               letterSpacing: '.3rem',
               textDecoration: 'none',
-              color: '#ae39b1',
+              color: '#e3e5f3',
             }}
           >
-            TIENDA ONLINE
+            SD BOUTIQUE
           </Typography>
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 						<GiHamburgerMenu
 							style={{ fontSize: "25px" }}
 							onClick={handleOpenNavMenu}
@@ -195,13 +228,21 @@ export const NavBar = () => {
 						>
 							{pages.map((page) => (
 								<MenuItem key={page} onClick={() =>
-                  navigate(page === 'Inicio' ? '/' : `/${page}`)
+                  handleNavMenuItemClick(page)
                 }>
 									<Typography textAlign="center">{page}</Typography>
 								</MenuItem>
 							))}
 						</Menu>
-					</Box>
+					</Box> */}
+          {/* <IoRocketSharp
+        style={{
+          display: { xs: 'none', md: 'flex' },
+          color: '#76ffff', 
+          fontSize: '30px',
+          animation: 'move 5s infinite',
+        }}
+       /> */}
           <Typography
             sx={{
               mr: 2,
@@ -210,13 +251,13 @@ export const NavBar = () => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: '#ae39b1',
+              color: '#e3e5f3',
               textDecoration: 'none',
               overflow: 'visible',
             fontSize: {xs:'20px', md:'50px'}
             }}
           >
-            TIENDA ONLINE
+            SD BOUTIQUE
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -225,7 +266,9 @@ export const NavBar = () => {
                 onClick={() =>
                   navigate(page === 'Inicio' ? '/' : `/${page}`)
                 }
-                sx={{ my: 2, color: '#ae39b1', display: 'block' }}
+                sx={{ my: 2, color: '#e3e5f3', display: 'block', '&:hover': {
+                  color: '#a9079f',
+                }, }}
               >
                 {page}
               </Button>
@@ -235,9 +278,9 @@ export const NavBar = () => {
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Box sx={{ display: 'flex' }}>
-            <Tooltip title="El carrito se vaciará en 24 hs">
-              <BiCartDownload
-                style={{ fontSize: '30px', color: '#ae39b1' }}
+            <Tooltip title="El carrito se vaciará en 24 hs"
+            style={{display:'flex'}}>
+              <BiCartDownload className='icon'
                 onClick={toggleDrawer('right', true)}
               />
               <span style={{ color: 'white' }}>
@@ -250,17 +293,16 @@ export const NavBar = () => {
 
 {user ? (
 									<Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-										<FaUser style={{ fontSize: "23px", color: "#ae39b1" }} />
+                    <Box style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+										<FaUser className='icon' />
 										<Typography variant="p" sx={{ color: "white" }}>
 											{user.username}
 										</Typography>
+                    </Box>
 									</Button>
 								) : (
 									<Button onClick={() => handleFromLoginPages("/Login", true)}>
-										<FaUser style={{ fontSize: "23px", color: "#ae39b1" }} />
-										<Typography sx={{ color: "white" }}>
-											Iniciar Sesión
-										</Typography>
+										<FaUser className='icon' style={{ fontSize: "23px"}} />
 									</Button>
 								)}
 
@@ -295,7 +337,7 @@ export const NavBar = () => {
             <Tooltip title="Cerrar Sesión">
 							<Box>
 								<Button onClick={handleSignOut} sx={{ p: 0 }}>
-									<TbLogout style={{ fontSize: "27px", color: "#ae39b1" }} />
+									<TbLogout className='icon' style={{ fontSize: "27px" }} />
 								</Button>
 							</Box>
 						</Tooltip>

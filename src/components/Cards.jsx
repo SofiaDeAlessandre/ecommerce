@@ -43,19 +43,8 @@ export const Cards = ({ filter }) => {
               cursor:'pointer'
             },
             boxShadow: '#ae39b1 0px 2px 7px 6px',
-            overflow: 'hidden', // Para asegurarse de que el pseudo-elemento no sobresalga del contenedor
+            overflow: 'hidden',
             '&::before': {
-              
-              
-              // top: '-20px',
-              // right: '-20px',
-              // bottom: '-20px',
-              // left: '-20px',
-              // borderRadius: '25px', // Ajusta el radio del borde
-              // border: '10px solid transparent',
-              // filter: 'blur(20px)', // Ajusta el desenfoque
-              // zIndex: -1,
-              // backgroundColor: 'rgba(255, 255, 255, 0.7)',
               top: '-30px',
               right: '-30px',
               bottom: '-30px',
@@ -81,7 +70,7 @@ export const Cards = ({ filter }) => {
           <Link to={`/detail/${product.id}`} sx={{color:'#059999'}}>ver más</Link>
         </Box>
 ))) : (
-  <Typography variant="h6">No se encontraron productos</Typography>
+  <Typography variant="h6" style={{color:'#e3e5f3'}}>No se encontraron productos</Typography>
 )}
     </Container>
 

@@ -1,0 +1,21 @@
+@keyframes move {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(50px, -50px) rotate(80deg);
+    }
+    50% {
+      transform: translate(100px, 0px) rotate(0deg);
+    }
+    75% {
+      transform: translate(150px, -50px) rotate(80deg);
+    }
+    100% {
+      transform: translate(200px, -100px) rotate(-40deg);
+    }
+  }
+  
+  .rocket-icon {
+    animation: move 10s infinite linear;
+  }

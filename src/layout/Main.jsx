@@ -29,7 +29,7 @@ export const Main = () => {
 <Route path="detail/:id" element={<CardDetail />} />
 <Route path="CheckIn" element={user ? <CheckIn /> : <Navigate to="/Login"/>} />
 <Route path="OrderHistory" element={<OrderHistory/>}/>
-<Route path="Modal" element={<Modal />} />
+<Route path="Modal" element={<Modal/>} /> 
 </Routes>
   )
 }

@@ -54,7 +54,8 @@ import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Filter } from './Filter';
 import React from "react";
-
+import { IoRocketSharp } from "react-icons/io5";
+import './CardsContainer.css'
 export const CardsContainer = () => {
   const [filter, setFilter] = useState('');
   const [loading, setLoading] = useState(true);
@@ -72,6 +73,14 @@ export const CardsContainer = () => {
   return (
     <>
       <InfinitySlide/>
+      <IoRocketSharp
+        style={{
+          
+          color: '#a9079f', 
+          fontSize: '30px',
+          animation: 'move 5s infinite',
+        }}
+       />
       {loading ? (
         <React.Fragment>
           <svg width={0} height={0}>

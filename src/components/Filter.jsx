@@ -21,28 +21,28 @@ export const Filter = ({ setFilter }) => {
         onChange={handleChange}
         sx={{
           '& label.Mui-focused': {
-            color: '#66129b',
+            color: '#e3e5f3',
           },
           '& .MuiOutlinedInput-root': {
-            backgroundColor: '#ffeffeab',
+            backgroundColor: '#05031a',
             '& fieldset': {
-              borderColor: 'white',
+              borderColor: '#e3e5f3',
               borderWidth: '3px',
             },
             '&:hover fieldset': {
-              borderColor: 'white',
+              borderColor: '#e3e5f3',
             },
             '&.Mui-focused fieldset': {
-              borderColor: 'white',
+              borderColor: '#e3e5f3',
             },
-            color: '#66129b',
+            color: '#e3e5f3',
           },
         }}
         InputLabelProps={{
           sx: {
-            color: '#66129b',
+            color: '#e3e5f3',
             '&.Mui-focused': {
-              color: '#66129b',
+              color: '#e3e5f3',
             },
           },
         }}

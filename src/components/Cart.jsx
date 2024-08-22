@@ -15,22 +15,22 @@ export const Cart = ({ state, toggleDrawer }) => {
   const { user } = useContext(FirebaseContext);
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, height:'100%', overflowY:'scroll', backgroundColor:'#dbebeb'}}
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, height:'100%', overflowY:'scroll', backgroundColor:'#e3e5f3'}}
       role="presentation"
       onClick={(event) => event.stopPropagation()} 
       onKeyDown={(event) => event.stopPropagation()}
     >
       <Button onClick={toggleDrawer(anchor, false)}><IoClose /></Button>
-      <Button onClick={handleDeleteAll}>Vaciar carrito</Button>
+      <Button onClick={handleDeleteAll} style={{color:'#0c1040'}}>Vaciar carrito</Button>
       {cart.length === 0 ? (
-        <Typography>No hay productos en el carrito</Typography>
+        <Typography style={{color:'#0c1040'}}>No hay productos en el carrito</Typography>
       ) : (
         cart?.map((product) => (
           <Box
             key={product.id}
             sx={{ padding: 2, borderBottom: '1px solid #ddd', textAlign:'center'}}
           >
-            <Button onClick={() => handleDelete(product)}>
+            <Button onClick={() => handleDelete(product)} style={{color:'#0c1040'}}>
               Quitar del carrito
             </Button>
             <Typography variant="h6">{product.name}</Typography>

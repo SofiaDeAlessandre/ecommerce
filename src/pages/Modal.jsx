@@ -1,67 +1,76 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-
+import { useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 
 import { FirebaseContext } from "../context/FirebaseContext";
+import { Link } from "react-router-dom";
 
 export const Modal = () => {
-	const { modal } = useContext(FirebaseContext);
+	const { modal, setModal } = useContext(FirebaseContext);
 
 	const navigate = useNavigate();
+	useEffect(() => {
+		const storedModal = localStorage.getItem('modal');
+		if (storedModal) {
+		  setModal(Number(storedModal));
+		}
+	  }, []);
 	return (
 		<>
 			<Box
 				sx={{
-					backgroundColor: "white",
-
-					margin: { xs: "20px", sm: "20px auto" },
-					padding: "10px",
-					borderRadius: 5,
-					display: "flex",
-					flexDirection: "column",
-					gap: 1,
-					width: { sx: 0, sm: "100%" },
+					backgroundColor:"white", padding:"10px", borderRadius:"10px",
+						position: 'relative',
+						//borderRadius: '18px',
+						width: { sx: 0, sm: "100%" },
 					maxWidth: 800,
-					borderWidth: "10px",
-					borderStyle: "solid",
-					//   borderImage: url(${fondoCheck}) 10,
+						margin: 'auto',
+						textAlign: 'center',
+						borderColor:'white',
+						transition: 'transform 0.3s ease',
+						boxShadow: '#ae39b1 0px 2px 7px 6px',
+						overflow: 'hidden'
 				}}
 			>
+				
 				<Box
-					sx={{
-						display: "flex",
-						justifyContent: "flex-start",
-					}}
-				>
-					<Button
-						onClick={() => navigate("/")}
-						sx={{
-							color: "#51074d",
-							width: "auto",
-							fontWeight: 700,
-							fontSize: 12,
-							display: "inline-block",
-							"&:hover": {
-								color: "#86067f",
-							},
-						}}
-					>
-						{modal === 0 && "Aceptar"}
-						{modal === 1 && "Regresar"}
-					</Button>
-				</Box>
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+            }}
+          >
+            <Button
+              onClick={() => navigate('/')}
+              sx={{
+                color: '#51074d',
+                width: 'auto',
+                fontWeight: 700,
+                fontFamily: 'Spectral',
+                fontSize: 12,
+                display: 'inline-block',
+                '&:hover': {
+                  color: '#a9079f',
+                },
+              }}
+            >
+              {modal === 0 && 'Aceptar'}
+              {modal === 1 && 'Regresar'}
+            </Button>
+          </Box>
+					
+				
 
 				<Typography
 					sx={{
 						fontSize: 24,
 						textAlign: "center",
 						fontWeight: 700,
-						color: "#5c07a6",
+						color: "#a9079f",
 					}}
 				>
 					{modal === 0 && "Se ha registrado correctamente"}
-					{modal === 1 && "GRACIAS POR SU COMPRA!!"}
+					{modal === 1 && "¡GRACIAS POR SU COMPRA!"}
 				</Typography>
 				{modal === 1 && (
 					<>
@@ -74,15 +83,7 @@ export const Modal = () => {
 						>
 							Su pedido llegará en 48hs.
 						</Typography>
-						<Typography
-							sx={{
-								fontSize: 20,
-								textAlign: "center",
-								fontWeight: 500,
-							}}
-						>
-							Aproveche nuestras promociones!!
-						</Typography>
+					
 					</>
 				)}
 			</Box>

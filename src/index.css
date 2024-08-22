@@ -3,12 +3,30 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-     background-image: url(./assets-img/galaxy-img.jpg) ;
+    background-image: url('./assets-img/galaxy-img.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: rgba(12, 6, 34, 0.7);
+    background-color: #020522ca;
   background-blend-mode: overlay;    
 }
 img {
     width: 100%;
+  }
+  .icon {
+    font-size: 27px;
+    color: #e3e5f3;
+    transition: color 0.3s;
+  }
+  
+  .icon:hover {
+    color: #a9079f;
+  }
+
+  .iconsFooter {
+    font-size: 20px;
+    color: #e3e5f3;
+    transition: color 0.3s;
+  }
+  .iconsFooter:hover {
+    color: #a9079f;
   }

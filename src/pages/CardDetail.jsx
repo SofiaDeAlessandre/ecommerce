@@ -31,19 +31,8 @@ export const CardDetail = () => {
         cursor:'pointer'
       },
       boxShadow: '#ae39b1 0px 2px 7px 6px',
-      overflow: 'hidden',
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: '-30px',
-        right: '-30px',
-        bottom: '-30px',
-        left: '-30px,',
-        borderRadius: '30px',
-        border: '30px solid #f7f3f30d',
-        webkitFilter: 'blur(8px)',
-        filter: 'blur(2px)',
-        zIndex: '1'}}}>
+      overflow: 'hidden'
+      }}>
           <Button onClick={()=>navigate('/Productos')} sx={{color:'#059999'}}>Regresar</Button>
       {product ? (
         <Box>
@@ -52,7 +41,6 @@ export const CardDetail = () => {
           <Typography>{product.description}</Typography>
           <Typography>Precio: ${product.price}</Typography>
           <AddButton/>
-          <Button sx={{color:'#059999'}}>Comprar</Button>
           </Box>
       ) : (
         <Typography>Producto no encontrado</Typography>
