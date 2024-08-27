@@ -32,7 +32,7 @@ export const Cart = ({ state, toggleDrawer }) => {
         <IoClose style={{color:'#6f7295'}}/>
       </Button>
       <Button onClick={handleDeleteAll} sx={{ color: '#6f7295', '&:hover': {
-                    color: '#a9079f',
+                    color: '#d07224',
                   } }}>
         Vaciar carrito
       </Button>
@@ -55,7 +55,7 @@ export const Cart = ({ state, toggleDrawer }) => {
             <Button
               onClick={() => handleDelete(product)}
               sx={{ color: '#6f7295', '&:hover': {
-                    color: '#a9079f',
+                    color: '#d07224',
                   } }}
             >
               Quitar del carrito
@@ -93,7 +93,7 @@ export const Cart = ({ state, toggleDrawer }) => {
                     user ? () => navigate('/CheckIn') : () => navigate('/Login')
                   }
                   sx={{ backgroundColor:'#6f7295', color:'#e3e5f3',margin:'auto','&:hover': {
-                    color: '#a9079f'}}}
+                    color: '#d07224'}}}
                 >
                   Comprar
                 </Button>

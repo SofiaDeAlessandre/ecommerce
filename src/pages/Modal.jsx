@@ -48,11 +48,10 @@ export const Modal = () => {
               color: '#6f7295',
               width: 'auto',
               fontWeight: 700,
-              fontFamily: 'Spectral',
               fontSize: 12,
               display: 'inline-block',
               '&:hover': {
-                color: '#a9079f',
+                color: '#d07224',
               },
             }}
           >
@@ -65,7 +64,7 @@ export const Modal = () => {
             fontSize: 24,
             textAlign: 'center',
             fontWeight: 700,
-            color: '#a9079f',
+            color: '#d07224',
           }}
         >
           {modal === 0 && 'Se ha registrado correctamente'}

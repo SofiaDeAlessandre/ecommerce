@@ -86,7 +86,7 @@ export const Login = () => {
       sx={{
         backgroundColor: '#e3e5f3',
         background: 'transparent',
-        boxShadow: '#ae39b1 0px 4px 15px',
+        boxShadow: '#6f7295 0px 4px 15px',
         borderRadius: '30px',
         webkitFilter: 'blur(10px)',
         width: { xs: '70%', lg: '40%' },
@@ -197,7 +197,7 @@ export const Login = () => {
           margin: 'auto',
           color: '#6f7295',
           '&:hover': {
-            color: '#a9079f',
+            color: '#d07224',
           },
         }}
       >
@@ -210,7 +210,7 @@ export const Login = () => {
           sx={{
             color: '#6f7295',
             '&:hover': {
-              color: '#a9079f',
+              color: '#d07224',
             },
           }}
         >

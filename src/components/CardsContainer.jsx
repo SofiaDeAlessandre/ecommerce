@@ -23,7 +23,7 @@ export const CardsContainer = () => {
       <InfinitySlide />
       <IoRocketSharp
         style={{
-          color: '#a9079f',
+          color: '#d07224',
           fontSize: '30px',
           animation: 'move 5s infinite',
         }}

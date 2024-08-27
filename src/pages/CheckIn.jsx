@@ -37,13 +37,13 @@ export const CheckIn = () => {
           maxWidth: '80px',
           alignSelf: 'center',
           '&:hover': {
-            color: '#a9079f',
+            color: '#d07224',
           },
         }}
       >
         Regresar
       </Button>
-      <Typography variant="h5" sx={{ color: '#e3e5f3', textAlign: 'center' }}>
+      <Typography variant="h5" sx={{ color: '#d07224', textAlign: 'center' }}>
         Mis compras
       </Typography>
       <Container
@@ -95,7 +95,7 @@ export const CheckIn = () => {
             </Typography>
           </Box>
         ))}
-        <Typography sx={{ color: '#e3e5f3', textAlign: 'center' }}>
+        <Typography variant='h5' sx={{ color: '#e3e5f3', textAlign: 'center' }}>
           Total: $ {subtotal}{' '}
         </Typography>
         <Button
@@ -107,7 +107,7 @@ export const CheckIn = () => {
             backgroundColor: '#6f7295',
             minWidth: '30px',
             '&:hover': {
-              color: '#a9079f',
+              color: '#d07224',
             },
           }}
         >

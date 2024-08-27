@@ -7,9 +7,9 @@ export const Quantity = ({ product }) => {
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent:'center' }}>
-        <Button onClick={() => handleAddQuantity(product.id)}>+</Button>
+        <Button onClick={() => handleAddQuantity(product.id)} sx={{color:'#d07224'}}>+</Button>
         <Box>{product.quantity}</Box>
-        <Button onClick={() => handleRemoveQuantity(product.id)}>-</Button>
+        <Button onClick={() => handleRemoveQuantity(product.id)} sx={{color:'#d07224'}}>-</Button>
       </Box>
     </>
   );

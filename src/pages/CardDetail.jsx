@@ -40,7 +40,7 @@ export const CardDetail = () => {
         sx={{
           color: '#6f7295',
           '&:hover': {
-            color: '#a9079f',
+            color: '#d07224',
           },
         }}
       >

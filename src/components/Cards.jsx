@@ -52,7 +52,7 @@ export const Cards = ({ filter }) => {
               {product.name}
             </Typography>
             <Typography>${product.price}</Typography>
-            <Link to={`/detail/${product.id}`} style={{textDecoration:'none', color:'#6f7295'}}>ver más</Link>
+            <Link to={`/detail/${product.id}`} style={{textDecoration:'none', color:'#d07224'}}>ver más</Link>
           </Box>
         ))
       ) : ( 

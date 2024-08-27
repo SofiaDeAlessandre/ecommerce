@@ -200,7 +200,7 @@ export const NavBar = () => {
                   color: '#e3e5f3',
                   display: 'block',
                   '&:hover': {
-                    color: '#a9079f',
+                    color: '#d07224',
                   },
                 }}
               >
