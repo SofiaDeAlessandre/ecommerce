@@ -158,7 +158,7 @@ export const Login = () => {
                 }
                 edge="end"
               >
-                {typePassword === 'password' ? <IoEyeSharp /> : <FaEyeSlash />}
+                {typePassword === 'password' ? <IoEyeSharp style={{color:'#e3e5f3'}}/> : <FaEyeSlash style={{color:'#e3e5f3'}}/>}
               </IconButton>
             </InputAdornment>
           ),
