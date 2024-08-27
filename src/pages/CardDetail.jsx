@@ -16,9 +16,7 @@ export const CardDetail = () => {
     <Container
       style={{
         backgroundColor: '#e3e5f3',
-        width: 'auto',
         padding: '10px',
-        borderRadius: '10px',
         position: 'relative',
         borderRadius: '18px',
         width: '350px',
