@@ -31,7 +31,6 @@ export const CheckIn = () => {
         onClick={() => navigate('/')}
         sx={{
           display: 'flex',
-          color: '#e3e5f3',
           color: '#6f7295',
           minWidth: '30px',
           maxWidth: '80px',
@@ -95,8 +94,8 @@ export const CheckIn = () => {
             </Typography>
           </Box>
         ))}
-        <Typography variant='h5' sx={{ color: '#e3e5f3', textAlign: 'center' }}>
-          Total: $ {subtotal}{' '}
+        <Typography variant="h5" sx={{ color: '#e3e5f3', textAlign: 'center' }}>
+          Total: $ {subtotal}
         </Typography>
         <Button
           onClick={handlefinalizePurchase}

@@ -29,12 +29,12 @@ export const CardsContainer = () => {
         }}
       />
       {loading ? (
-        <Spinner/>
+        <Spinner />
       ) : (
         <>
           <Filter setFilter={setFilter} />
-         <Cards filter={filter} />
-          </>
+          <Cards filter={filter} />
+        </>
       )}
     </>
   );

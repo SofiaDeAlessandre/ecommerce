@@ -15,7 +15,7 @@ export const CardDetail = () => {
   return (
     <Container
       style={{
-        backgroundColor: 'white',
+        backgroundColor: '#e3e5f3',
         width: 'auto',
         padding: '10px',
         borderRadius: '10px',
@@ -24,7 +24,6 @@ export const CardDetail = () => {
         width: '350px',
         margin: 'auto',
         textAlign: 'center',
-        backgroundColor: 'white',
         borderColor: 'white',
         transition: 'transform 0.3s ease',
         '&:hover': {
@@ -47,12 +46,22 @@ export const CardDetail = () => {
         Regresar
       </Button>
       {product ? (
-        <Box style={{display:'flex', flexDirection:'column', gap: '6px', alignItems:'center'}}>
-          <Typography variant='h6' style={{textDecoration:'underline'}}> {product.name}</Typography>
+        <Box
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '6px',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant="h6" style={{ textDecoration: 'underline' }}>
+            {' '}
+            {product.name}
+          </Typography>
           <img
             src={product.image}
             alt={product.name}
-            style={{ width: '300px', borderRadius:'18px' }}
+            style={{ width: '300px', borderRadius: '18px' }}
           />
           <Typography>Descripción: {product.description}</Typography>
           <Typography>Precio: ${product.price}</Typography>

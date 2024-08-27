@@ -40,7 +40,10 @@ export const Cards = ({ filter }) => {
                 cursor: 'pointer',
               },
               boxShadow: '#6f7295 0px 2px 7px 6px',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '6px',
             }}
           >
             <img
@@ -48,15 +51,20 @@ export const Cards = ({ filter }) => {
               alt={product.name}
               style={{ borderRadius: '16px 16px 0 0', objectFit: 'cover' }}
             />
-            <Typography variant="h6" style={{ font: 'bold' }}>
+            <Typography variant="h6">
               {product.name}
             </Typography>
             <Typography>${product.price}</Typography>
-            <Link to={`/detail/${product.id}`} style={{textDecoration:'none', color:'#d07224'}}>ver más</Link>
+            <Link
+              to={`/detail/${product.id}`}
+              style={{ textDecoration: 'none', color: '#d07224' }}
+            >
+              ver más
+            </Link>
           </Box>
         ))
-      ) : ( 
-        <Typography variant="h6" style={{ color: '#6f7295' }}>
+      ) : (
+        <Typography variant="h6" sx={{ color: '#6f7295' }}>
           No se encontraron productos
         </Typography>
       )}

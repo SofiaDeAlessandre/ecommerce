@@ -17,7 +17,7 @@ export const OrderHistory = () => {
         Historial de compras
       </Typography>
       <IoMdClose
-        style={{ color: '#6f7295', margin: '15px', fontSize:'25px' }}
+        style={{ color: '#6f7295', margin: '15px', fontSize: '25px' }}
         onClick={() => navigate('/')}
       />
       <Container
@@ -33,11 +33,10 @@ export const OrderHistory = () => {
         {user?.orders?.map((order, index) => (
           <Box
             sx={{
-              backgroundColor:'#e3e5f3',
+              backgroundColor: '#e3e5f3',
               padding: '10px',
               borderRadius: '10px',
               position: 'relative',
-              borderRadius: '18px',
               width: '350px',
               margin: 'auto',
               textAlign: 'center',
@@ -52,17 +51,36 @@ export const OrderHistory = () => {
             }}
             key={index}
           >
-            <Typography variant='h6' sx={{ color: 'black' }}>Precio total de la compra: ${order.total}</Typography>
+            <Typography variant="h6" sx={{ color: 'black' }}>
+              Precio total de la compra: ${order.total}
+            </Typography>
             {order?.cart?.map((cart, index) => (
-              <Box key={index} sx={{display:'flex', flexDirection:'column', gap:'6px', alignItems:'center'}}>
-                <Typography variant='h5' sx={{ color: 'black', textDecoration:'underline' }}>{cart.name}</Typography>
+              <Box
+                key={index}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '6px',
+                  alignItems: 'center',
+                }}
+              >
+                <Typography
+                  variant="h5"
+                  sx={{ color: 'black', textDecoration: 'underline' }}
+                >
+                  {cart.name}
+                </Typography>
                 <Typography sx={{ color: 'black' }}>
                   Descripción: {cart.description}
                 </Typography>
-                <Typography sx={{ color: 'black' }}>Cantidad: {cart.quantity}</Typography>
-                <Typography sx={{ color: 'black' }}>Precio por unidad: ${cart.price}</Typography>
+                <Typography sx={{ color: 'black' }}>
+                  Cantidad: {cart.quantity}
+                </Typography>
+                <Typography sx={{ color: 'black' }}>
+                  Precio por unidad: ${cart.price}
+                </Typography>
                 <img
-                  style={{ width: '300px', borderRadius:'16px' }}
+                  style={{ width: '300px', borderRadius: '16px' }}
                   src={cart.image}
                   alt={cart.name}
                 />

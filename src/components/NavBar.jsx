@@ -126,7 +126,12 @@ export const NavBar = () => {
           <Box sx={{ display: 'flex' }}>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <GiHamburgerMenu
-                style={{ fontSize: '25px', marginTop: '7px', color: '#e3e5f3', marginRight:'15px' }}
+                style={{
+                  fontSize: '25px',
+                  marginTop: '7px',
+                  color: '#e3e5f3',
+                  marginRight: '15px',
+                }}
                 onClick={handleOpenNavMenu}
               />
               <Menu
@@ -213,40 +218,41 @@ export const NavBar = () => {
               <Tooltip
                 title="El carrito se vaciará en 24 hs"
                 sx={{ display: 'flex' }}
-              ><Box>
-                <BiCartDownload
-                  className="icon"
-                  onClick={toggleDrawer('right', true)}
-                />
-                <span style={{ color: 'white' }}>
-                  {quantity > 0 ? quantity : ''}
-                </span>
+              >
+                <Box>
+                  <BiCartDownload
+                    className="icon"
+                    onClick={toggleDrawer('right', true)}
+                  />
+                  <span style={{ color: 'white' }}>
+                    {quantity > 0 ? quantity : ''}
+                  </span>
                 </Box>
               </Tooltip>
             </Box>
             <Cart state={state} toggleDrawer={toggleDrawer} />
             <Tooltip title="Iniciar Sesión">
               <Box>
-              {user ? (
-                <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Box
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <FaUser className="icon" style={{ marginTop: '25px'}} />
-                    <Typography variant="p" sx={{ color: '#e3e5f3' }}>
-                      {user.username}
-                    </Typography>
-                  </Box>
-                </Button>
-              ) : (
-                <Button onClick={() => handleFromLoginPages('/Login', true)}>
-                  <FaUser className="icon" style={{ fontSize: '23px' }} />
-                </Button>
-              )}
+                {user ? (
+                  <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Box
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <FaUser className="icon" style={{ marginTop: '25px' }} />
+                      <Typography variant="p" sx={{ color: '#e3e5f3' }}>
+                        {user.username}
+                      </Typography>
+                    </Box>
+                  </Button>
+                ) : (
+                  <Button onClick={() => handleFromLoginPages('/Login', true)}>
+                    <FaUser className="icon" style={{ fontSize: '23px' }} />
+                  </Button>
+                )}
               </Box>
             </Tooltip>
             <Menu

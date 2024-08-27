@@ -20,7 +20,6 @@ export const Footer = () => {
         gap: '3px',
         width: '100%',
         padding: '10px 0px',
-        textAlign: 'center',
         color: '#f8bbd0',
         boxShadow: 'rgb(190 195 253) 0px 4px 15px',
         backdropFilter: 'blur(2px)',
@@ -35,7 +34,10 @@ export const Footer = () => {
           alignItems: 'center',
         }}
       >
-        <Typography sx={{fontSize:'12px', color:'#e3e5f3'}}> Medios de pago:</Typography>
+        <Typography sx={{ fontSize: '12px', color: '#e3e5f3' }}>
+          {' '}
+          Medios de pago:
+        </Typography>
         <>
           <img
             src={img1}
