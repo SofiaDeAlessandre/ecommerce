@@ -175,7 +175,7 @@ export const Register = () => {
                 }
                 edge="end"
               >
-                {typePassword === 'password' ? <IoEyeSharp sx={{color:'#e3e5f3'}} /> : <FaEyeSlash sx={{color:'#e3e5f3'}}/>}
+                {typePassword === 'password' ? <IoEyeSharp style={{color:'#e3e5f3'}} /> : <FaEyeSlash style={{color:'#e3e5f3'}}/>}
               </IconButton>
             </InputAdornment>
           ),
