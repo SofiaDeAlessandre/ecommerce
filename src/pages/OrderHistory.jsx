@@ -12,12 +12,12 @@ export const OrderHistory = () => {
     <>
       <Typography
         variant="h5"
-        style={{ color: '#e3e5f3', margin: 'auto', marginTop: '15px' }}
+        style={{ color: '#e3e5f3', margin: 'auto', marginTop: '20px' }}
       >
         Historial de compras
       </Typography>
       <IoMdClose
-        style={{ color: 'white', margin: '15px' }}
+        style={{ color: '#6f7295', margin: '15px' }}
         onClick={() => navigate('/')}
       />
       <Container

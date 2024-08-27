@@ -8,6 +8,8 @@ import { CartContext } from '../context/CartContext';
 import { Quantity } from './Quantity';
 import { IoClose } from 'react-icons/io5';
 import { FirebaseContext } from '../context/FirebaseContext';
+import img from '../assets-img/pexels-alexandrep-junior-7736101.jpg'
+
 
 export const Cart = ({ state, toggleDrawer }) => {
   const navigate = useNavigate();
@@ -21,19 +23,21 @@ export const Cart = ({ state, toggleDrawer }) => {
         height: '100%',
         overflowY: 'scroll',
         backgroundColor: '#e3e5f3',
-      }}
+        }}
       role="presentation"
       onClick={(event) => event.stopPropagation()}
       onKeyDown={(event) => event.stopPropagation()}
     >
       <Button onClick={toggleDrawer(anchor, false)}>
-        <IoClose />
+        <IoClose style={{color:'#6f7295'}}/>
       </Button>
-      <Button onClick={handleDeleteAll} style={{ color: '#0c1040' }}>
+      <Button onClick={handleDeleteAll} sx={{ color: '#6f7295', '&:hover': {
+                    color: '#a9079f',
+                  } }}>
         Vaciar carrito
       </Button>
       {cart.length === 0 ? (
-        <Typography style={{ color: '#0c1040' }}>
+        <Typography style={{ color: '#6f7295', marginTop:'15px', textAlign:'center' }}>
           No hay productos en el carrito
         </Typography>
       ) : (
@@ -42,13 +46,17 @@ export const Cart = ({ state, toggleDrawer }) => {
             key={product.id}
             sx={{
               padding: 2,
-              borderBottom: '1px solid #ddd',
+              border: '10px solid transparent',
               textAlign: 'center',
+              borderImage: `url(${img}) 30 stretch`,
+              margin:'2px'
             }}
           >
             <Button
               onClick={() => handleDelete(product)}
-              style={{ color: '#0c1040' }}
+              sx={{ color: '#6f7295', '&:hover': {
+                    color: '#a9079f',
+                  } }}
             >
               Quitar del carrito
             </Button>
@@ -68,7 +76,7 @@ export const Cart = ({ state, toggleDrawer }) => {
   );
 
   return (
-    <div>
+    <Box>
       {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Drawer
@@ -78,12 +86,14 @@ export const Cart = ({ state, toggleDrawer }) => {
           >
             {list(anchor)}
             {cart.length > 0 && (
-              <Box>
-                <Typography>Subtotal: $ {subtotal} </Typography>
+              <Box sx={{display:'flex', flexDirection:'column', justifyContent:'center', gap:'1em', backgroundColor: '#e3e5f3', margin:'4px'}}>
+                <Typography sx={{textAlign:'center'}}>Subtotal: $ {subtotal} </Typography>
                 <Button
                   onClick={
                     user ? () => navigate('/CheckIn') : () => navigate('/Login')
                   }
+                  sx={{ backgroundColor:'#6f7295', color:'#e3e5f3',margin:'auto','&:hover': {
+                    color: '#a9079f'}}}
                 >
                   Comprar
                 </Button>
@@ -92,6 +102,6 @@ export const Cart = ({ state, toggleDrawer }) => {
           </Drawer>
         </React.Fragment>
       ))}
-    </div>
+    </Box>
   );
 };
